@@ -12,6 +12,6 @@ public class User {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-    private String userid;
+    private String userId;
     private String password;
 }
