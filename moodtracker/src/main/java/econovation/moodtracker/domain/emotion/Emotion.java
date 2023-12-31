@@ -30,7 +30,10 @@ public class Emotion {
     private Integer stress;
     private Integer sleepTime;
 
-
+    public void setCalendarLog(CalendarLog calendarLog){
+        this.calendarLog = calendarLog;
+        calendarLog.setEmotion(this);
+    }
 
 
 }

@@ -27,5 +27,13 @@ public class Diary {
 
     private String content;
 
+    public void setCalendarLog(CalendarLog calendarLog){
+        this.calendarLog = calendarLog;
+        calendarLog.getDiaries().add(this);
+    }
 
+    public void setEmotion(Emotion emotion){
+        this.emotion = emotion;
+        emotion.getDiaries().add(this);
+    }
 }
