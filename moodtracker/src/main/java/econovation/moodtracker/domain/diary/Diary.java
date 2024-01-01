@@ -3,7 +3,9 @@ package econovation.moodtracker.domain.diary;
 import econovation.moodtracker.domain.calendarLog.CalendarLog;
 import econovation.moodtracker.domain.emotion.Emotion;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +13,7 @@ import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Diary {
     @Id
     @GeneratedValue
