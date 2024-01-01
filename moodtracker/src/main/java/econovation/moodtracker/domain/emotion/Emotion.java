@@ -4,6 +4,7 @@ import econovation.moodtracker.domain.calendarLog.CalendarLog;
 import econovation.moodtracker.domain.diary.Diary;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,7 +38,7 @@ public class Emotion {
 //        this.calendarLog = calendarLog;
 //        calendarLog.setEmotion(this);
 //    }
-
+    @Builder
     public Emotion(Long id, CalendarLog calendarLog, List<Diary> diaries, Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime) {
         this.id = id;
         this.diaries = diaries;
