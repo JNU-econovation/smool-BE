@@ -18,11 +18,11 @@ public class Emotion {
     @GeneratedValue
     @Column(name = "emotion_id")
     private Long id;
-    @OneToOne(mappedBy = "emotion", fetch = LAZY, cascade = ALL)
+    @OneToOne(mappedBy = "emotion", fetch = LAZY)
     @JoinColumn(name = "calendarlog_id")
     private CalendarLog calendarLog;
 
-    @OneToMany(mappedBy = "emotion", cascade = ALL)
+    @OneToMany(mappedBy = "emotion")
     private List<Diary> diaries = new ArrayList<>();
     private Integer happiness;
     private Integer sadness;
