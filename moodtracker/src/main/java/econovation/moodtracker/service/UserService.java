@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,8 +24,8 @@ public class UserService {
     }
 
     private void validateDuplicateUser(User user) {
-        List<User> findUsers = userRepository.findByUserId(user.getUserId());
-        if (!findUsers.isEmpty()){
+        Optional<User> findUser = userRepository.findUserByUserId(user.getUserId());
+        if(findUser.isPresent()){
             throw new IllegalStateException("이미 존재하는 아이디입니다.");
         }
     }
