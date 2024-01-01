@@ -20,7 +20,7 @@ public class CalendarLog {
     @Column(name = "calendarlog_id")
     private Long id;
     private LocalDate date;
-    @OneToMany(mappedBy = "calendarLog", cascade = ALL)
+    @OneToMany(mappedBy = "calendarLog")
     private List<Diary> diaries = new ArrayList<>();
 
     @OneToOne(fetch = LAZY)
