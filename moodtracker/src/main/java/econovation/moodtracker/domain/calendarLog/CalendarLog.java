@@ -3,10 +3,7 @@ package econovation.moodtracker.domain.calendarLog;
 import econovation.moodtracker.domain.diary.Diary;
 import econovation.moodtracker.domain.emotion.Emotion;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,4 +25,12 @@ public class CalendarLog {
 
     @OneToOne(fetch = LAZY)
     private Emotion emotion;
+
+    @Builder
+    public CalendarLog(Long id, LocalDate date, List<Diary> diaries, Emotion emotion) {
+        this.id = id;
+        this.date = date;
+        this.diaries = diaries;
+        this.emotion = emotion;
+    }
 }

@@ -33,10 +33,21 @@ public class Emotion {
     private Integer stress;
     private Integer sleepTime;
 
-    public void setCalendarLog(CalendarLog calendarLog){
+//    public void setCalendarLog(CalendarLog calendarLog){
+//        this.calendarLog = calendarLog;
+//        calendarLog.setEmotion(this);
+//    }
+
+    public Emotion(Long id, CalendarLog calendarLog, List<Diary> diaries, Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime) {
+        this.id = id;
+        this.diaries = diaries;
+        this.happiness = happiness;
+        this.sadness = sadness;
+        this.anxiety = anxiety;
+        this.stress = stress;
+        this.sleepTime = sleepTime;
+
         this.calendarLog = calendarLog;
         calendarLog.setEmotion(this);
     }
-
-
 }

@@ -4,6 +4,7 @@ import econovation.moodtracker.domain.calendarLog.CalendarLog;
 import econovation.moodtracker.domain.emotion.Emotion;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,13 +30,25 @@ public class Diary {
     private LocalDateTime time;
 
     private String content;
+//
+//    public void setCalendarLog(CalendarLog calendarLog){
+//        this.calendarLog = calendarLog;
+//        calendarLog.getDiaries().add(this);
+//    }
+//
+//    public void setEmotion(Emotion emotion){
+//        this.emotion = emotion;
+//        emotion.getDiaries().add(this);
+//    }
+    @Builder
+    public Diary(Long id, CalendarLog calendarLog, Emotion emotion, LocalDateTime time, String content) {
+        this.id = id;
+        this.time = time;
+        this.content = content;
 
-    public void setCalendarLog(CalendarLog calendarLog){
         this.calendarLog = calendarLog;
         calendarLog.getDiaries().add(this);
-    }
 
-    public void setEmotion(Emotion emotion){
         this.emotion = emotion;
         emotion.getDiaries().add(this);
     }
