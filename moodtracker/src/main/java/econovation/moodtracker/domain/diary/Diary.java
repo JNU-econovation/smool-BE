@@ -1,6 +1,7 @@
 package econovation.moodtracker.domain.diary;
 
 import econovation.moodtracker.domain.emotion.Emotion;
+import econovation.moodtracker.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,10 @@ public class Diary {
     private LocalDateTime time;
 
     private String content;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "users_id")
+    private User user;
 //
 //    public void setCalendarLog(CalendarLog calendarLog){
 //        this.calendarLog = calendarLog;
@@ -35,13 +40,12 @@ public class Diary {
 //        emotion.getDiaries().add(this);
 //    }
     @Builder
-    public Diary(Long id, Emotion emotion, LocalDateTime time, String content) {
+    public Diary(Long id, Emotion emotion, LocalDateTime time, String content, User user) {
         this.id = id;
         this.emotion = emotion;
         this.time = time;
         this.content = content;
 
-
-
+        this.user = user;
     }
 }
