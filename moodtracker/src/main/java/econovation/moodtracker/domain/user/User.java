@@ -2,24 +2,23 @@ package econovation.moodtracker.domain.user;
 
 import econovation.moodtracker.domain.diary.Diary;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class User {
     @Id @GeneratedValue
-    @Column(name = "user_id")
+    @Column(name = "users_id")
     private Long id;
     private String userId;
     private String password;
-    @Builder
-    public User(Long id, String userId, String password) {
-        this.id = id;
-        this.userId = userId;
-        this.password = password;
-    }
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    private List<Diary> diaries = new ArrayList<>();
 }
