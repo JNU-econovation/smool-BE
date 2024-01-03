@@ -1,29 +1,23 @@
 package econovation.moodtracker.domain.diary;
 
-import econovation.moodtracker.domain.calendarLog.CalendarLog;
 import econovation.moodtracker.domain.emotion.Emotion;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 import static jakarta.persistence.FetchType.*;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Diary {
     @Id
     @GeneratedValue
     @Column(name = "diary_id")
     private Long id;
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "calendarLog_id")
-    private CalendarLog calendarLog;
-    @ManyToOne(fetch = LAZY)
+
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "emotion_id")
     private Emotion emotion;
 
@@ -41,15 +35,13 @@ public class Diary {
 //        emotion.getDiaries().add(this);
 //    }
     @Builder
-    public Diary(Long id, CalendarLog calendarLog, Emotion emotion, LocalDateTime time, String content) {
+    public Diary(Long id, Emotion emotion, LocalDateTime time, String content) {
         this.id = id;
+        this.emotion = emotion;
         this.time = time;
         this.content = content;
 
-        this.calendarLog = calendarLog;
-        calendarLog.getDiaries().add(this);
 
-        this.emotion = emotion;
-        emotion.getDiaries().add(this);
+
     }
 }

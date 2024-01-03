@@ -1,12 +1,8 @@
 package econovation.moodtracker.domain.emotion;
 
-import econovation.moodtracker.domain.calendarLog.CalendarLog;
 import econovation.moodtracker.domain.diary.Diary;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +11,16 @@ import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.*;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Emotion {
     @Id
     @GeneratedValue
     @Column(name = "emotion_id")
     private Long id;
-    @OneToOne(mappedBy = "emotion", fetch = LAZY)
-    @JoinColumn(name = "calendarlog_id")
-    private CalendarLog calendarLog;
 
-    @OneToMany(mappedBy = "emotion")
-    private List<Diary> diaries = new ArrayList<>();
+    @OneToOne(mappedBy = "emotion", fetch = LAZY)
+    private Diary diary;
     private Integer happiness;
     private Integer sadness;
     private Integer anxiety;
@@ -39,16 +32,15 @@ public class Emotion {
 //        calendarLog.setEmotion(this);
 //    }
     @Builder
-    public Emotion(Long id, CalendarLog calendarLog, List<Diary> diaries, Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime) {
+    public Emotion(Long id, Diary diary, Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime) {
         this.id = id;
-        this.diaries = diaries;
+        this.diary = diary;
         this.happiness = happiness;
         this.sadness = sadness;
         this.anxiety = anxiety;
         this.stress = stress;
         this.sleepTime = sleepTime;
 
-        this.calendarLog = calendarLog;
-        calendarLog.setEmotion(this);
+        diary.setEmotion(this);
     }
 }
