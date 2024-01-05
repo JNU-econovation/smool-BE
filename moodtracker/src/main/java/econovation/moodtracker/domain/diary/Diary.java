@@ -32,10 +32,13 @@ public class Diary {
     @Builder
     public Diary(Long id, Emotion emotion, LocalDateTime time, String content, User user) {
         this.id = id;
-        this.emotion = emotion;
         this.time = time;
         this.content = content;
 
         this.user = user;
+        user.getDiaries().add(this);
+
+        this.emotion = emotion;
+        emotion.getDiaries().add(this);
     }
 }
