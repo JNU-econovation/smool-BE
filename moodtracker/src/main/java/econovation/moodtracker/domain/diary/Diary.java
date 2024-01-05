@@ -29,16 +29,6 @@ public class Diary {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "users_id")
     private User user;
-//
-//    public void setCalendarLog(CalendarLog calendarLog){
-//        this.calendarLog = calendarLog;
-//        calendarLog.getDiaries().add(this);
-//    }
-//
-//    public void setEmotion(Emotion emotion){
-//        this.emotion = emotion;
-//        emotion.getDiaries().add(this);
-//    }
     @Builder
     public Diary(Long id, Emotion emotion, LocalDateTime time, String content, User user) {
         this.id = id;
