@@ -14,6 +14,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -25,7 +27,27 @@ class DiaryServiceTest {
     @Autowired DiaryRepository diaryRepository;
     @Autowired EmotionService emotionService;
     @Autowired EmotionRepository emotionRepository;
+    @Test
+    //@Rollback(value = false)
+    public void 일기_작성() {
+        //given
+        User user = User.builder().build();
+        userService.join(user);
 
+        Emotion emotion = Emotion.builder().build();
+        emotionService.join(emotion);
+
+        Diary diary = Diary.builder()
+                .user(user)
+                .emotion(emotion)
+                .build();
+        //when
+        Long diaryId = diaryService.join(diary);
+        //then
+        //일기 작성
+        Optional<Diary> getDiary = diaryRepository.findById(diaryId);
+        assertEquals(getDiary, diaryId);
+    }
     @Test
     //@Rollback(value = false)
     public void 한_사용자_일기_두_개() {
@@ -55,4 +77,6 @@ class DiaryServiceTest {
     assertEquals(user.getDiaries().size(),2);
 
     }
+
+
 }
