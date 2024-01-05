@@ -18,7 +18,7 @@ public class Diary {
     @Column(name = "diary_id")
     private Long id;
 
-    @OneToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "emotion_id")
     private Emotion emotion;
 
