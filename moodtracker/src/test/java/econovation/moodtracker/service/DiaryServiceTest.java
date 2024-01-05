@@ -1,8 +1,10 @@
 package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.diary.Diary;
+import econovation.moodtracker.domain.emotion.Emotion;
 import econovation.moodtracker.domain.user.User;
 import econovation.moodtracker.repository.DiaryRepository;
+import econovation.moodtracker.repository.EmotionRepository;
 import econovation.moodtracker.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +23,8 @@ class DiaryServiceTest {
     @Autowired UserRepository userRepository;
     @Autowired DiaryService diaryService;
     @Autowired DiaryRepository diaryRepository;
+    @Autowired EmotionService emotionService;
+    @Autowired EmotionRepository emotionRepository;
 
     @Test
     //@Rollback(value = false)
@@ -29,12 +33,17 @@ class DiaryServiceTest {
     User user = User.builder().build();
     userService.join(user);
 
+    Emotion emotion = Emotion.builder().build();
+    emotionService.join(emotion);
+
     Diary diary = Diary.builder()
             .user(user)
+            .emotion(emotion)
             .build();
 
     Diary diary1 = Diary.builder()
             .user(user)
+            .emotion(emotion)
             .build();
     //when
     diaryService.join(diary);
