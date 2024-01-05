@@ -19,8 +19,8 @@ public class Emotion {
     @Column(name = "emotion_id")
     private Long id;
 
-    @OneToOne(mappedBy = "emotion", fetch = LAZY)
-    private Diary diary;
+    @OneToMany(mappedBy = "emotion", fetch = LAZY)
+    private List<Diary> diaries = new ArrayList<>();
     private Integer happiness;
     private Integer sadness;
     private Integer anxiety;
@@ -32,15 +32,13 @@ public class Emotion {
 //        calendarLog.setEmotion(this);
 //    }
     @Builder
-    public Emotion(Long id, Diary diary, Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime) {
+    public Emotion(Long id, List<Diary> diaries, Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime) {
         this.id = id;
-        this.diary = diary;
+        this.diaries = diaries;
         this.happiness = happiness;
         this.sadness = sadness;
         this.anxiety = anxiety;
         this.stress = stress;
         this.sleepTime = sleepTime;
-
-        diary.setEmotion(this);
     }
 }
