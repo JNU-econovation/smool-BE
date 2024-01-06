@@ -19,6 +19,7 @@ public class UserService {
 
     //회원 가입
     public Long join(UserCreateRequestDTO userCreateRequestDTO){
+        validateDuplicateUser(userCreateRequestDTO);
         User user = User.builder()
                 .userId(userCreateRequestDTO.getUserId())
                 .password(userCreateRequestDTO.getPassword())
