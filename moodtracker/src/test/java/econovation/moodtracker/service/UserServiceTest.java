@@ -48,17 +48,24 @@ class UserServiceTest {
     @Test
     public void 중복_회원_예외() throws Exception{
         //given
-        User user = User.builder()
-                .userId("abc123")
+        String userId = "abc123";
+        String password = "123abc";
+
+        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
+                .userId(userId)
+                .password(password)
                 .build();
-        User user1 = User.builder()
-                .userId("abc123")
+
+        UserCreateRequestDTO userCreateRequestDTO1 = UserCreateRequestDTO.builder()
+                .userId(userId)
+                .password(password)
                 .build();
+
         //when
-        userService.join(user);
+        userService.join(userCreateRequestDTO);
         //then
         Throwable exception = assertThrows(RuntimeException.class, () -> {
-            userService.join(user1);
+            userService.join(userCreateRequestDTO1);
         });
         assertEquals("이미 존재하는 아이디입니다.", exception.getMessage());
     }
