@@ -1,5 +1,6 @@
 package econovation.moodtracker.service;
 
+import econovation.moodtracker.domain.user.DTO.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.user.User;
 import econovation.moodtracker.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -25,21 +26,23 @@ class UserServiceTest {
     public void 회원가입() throws Exception{
         //given
         String userId = "abc123";
-        User user = User.builder()
+        String password = "123abc";
+
+        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
                 .userId(userId)
+                .password(password)
                 .build();
         //when
-        Long savedId = userService.join(user);
+        Long savedId = userService.join(userCreateRequestDTO);
         //then
         // pk값으로 조회
         Optional<User> getUserById = userRepository.findById(savedId);
         assertNotNull(getUserById);
-        assertEquals(user, userRepository.findById(savedId).get());
-
+        assertEquals(userRepository.findAll().size(), 1);
         // 아이디로 조회
-        Optional<User> getUserIdByUserId = userRepository.findUserByUserId(userId);
-        assertNotNull(getUserIdByUserId);
-        assertEquals(user, getUserIdByUserId.get());
+        Optional<User> getUserByUserId = userRepository.findUserByUserId(userId);
+        assertNotNull(getUserByUserId);
+        assertEquals(getUserByUserId.get().getUserId(), userId);
     }
 
     @Test
