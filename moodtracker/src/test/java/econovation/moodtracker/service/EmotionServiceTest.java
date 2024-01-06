@@ -29,7 +29,7 @@ class EmotionServiceTest {
     @Autowired UserRepository userRepository;
 
     @Test
-    @Rollback(value = false)
+    //@Rollback(value = false)
     public void 감정저장(){
         //given
         User user = User.builder().build();
@@ -45,9 +45,9 @@ class EmotionServiceTest {
                 .build();
 
         //when
-        EmotionResponseDTO savedEmotion = emotionService.join(emotionCreateRequestDTO);
+        EmotionResponseDTO savedEmotionDTO = emotionService.join(emotionCreateRequestDTO);
 
         //then
-
+        assertEquals(emotionRepository.findAll().size(), 1);
     }
 }
