@@ -2,6 +2,7 @@ package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.emotion.DTO.Request.EmotionCreateRequestDTO;
 import econovation.moodtracker.domain.emotion.DTO.Response.EmotionResponseDTO;
+import econovation.moodtracker.domain.user.DTO.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.user.User;
 import econovation.moodtracker.repository.DiaryRepository;
 import econovation.moodtracker.repository.EmotionRepository;
@@ -32,9 +33,10 @@ class EmotionServiceTest {
     //@Rollback(value = false)
     public void 감정저장(){
         //given
-        User user = User.builder().build();
-        Long userId = userService.join(user);
-
+        userService.join(UserCreateRequestDTO
+                .builder()
+                .build()
+        );
         EmotionCreateRequestDTO emotionCreateRequestDTO = EmotionCreateRequestDTO.builder()
                 .userPK(1L)
                 .happiness(1)
