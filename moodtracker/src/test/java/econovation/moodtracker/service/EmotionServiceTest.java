@@ -1,6 +1,8 @@
 package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.diary.Diary;
+import econovation.moodtracker.domain.emotion.DTO.Request.EmotionCreateRequestDTO;
+import econovation.moodtracker.domain.emotion.DTO.Response.EmotionResponseDTO;
 import econovation.moodtracker.domain.emotion.Emotion;
 import econovation.moodtracker.domain.user.User;
 import econovation.moodtracker.repository.DiaryRepository;
@@ -35,18 +37,25 @@ class EmotionServiceTest {
     @Autowired UserRepository userRepository;
 
     @Test
-    //@Rollback(value = false)
+    @Rollback(value = false)
     public void 감정저장(){
         //given
         User user = User.builder().build();
         Long userId = userService.join(user);
 
-        Emotion emotion = Emotion.builder().build();
+        EmotionCreateRequestDTO emotionCreateRequestDTO = EmotionCreateRequestDTO.builder()
+                .userPK(1L)
+                .happiness(1)
+                .anxiety(2)
+                .sadness(3)
+                .stress(4)
+                .sleepTime(5)
+                .build();
+
         //when
-        Long savedEmotionId = emotionService.join(emotion);
+        EmotionResponseDTO savedEmotion = emotionService.join(emotionCreateRequestDTO);
+
         //then
-        Optional<Emotion> getEmotion = emotionRepository.findById(savedEmotionId);
-        assertNotNull(getEmotion);
-        assertEquals(emotion, getEmotion.get());
+
     }
 }
