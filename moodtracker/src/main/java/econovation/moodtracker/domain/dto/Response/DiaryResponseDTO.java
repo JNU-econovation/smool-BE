@@ -2,6 +2,7 @@ package econovation.moodtracker.domain.dto.Response;
 
 import econovation.moodtracker.domain.diary.Diary;
 import econovation.moodtracker.domain.emotion.Emotion;
+import econovation.moodtracker.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class DiaryResponseDTO {
 //    LocalDateTime localDateTime = LocalDateTime.now();
 //    LocalTime localTime = localDateTime.toLocalTime();
 
-//DTO -> Entity = toEntity
+    //DTO -> Entity = toEntity
 //Entity -> DTO = of
     // 사용자 domain
     private Long userPK;
@@ -35,19 +36,18 @@ public class DiaryResponseDTO {
     private Integer stress;
     private Integer sleepTime;
 
-    public static DiaryResponseDTO of(Diary diary){
-        return DiaryResponseDTO.builder()
-                .content(diary.getContent())
-                .build();
-    }
 
-    public static DiaryResponseDTO of(Emotion emotion){
+    public static DiaryResponseDTO of(User user, Emotion emotion, Diary diary) {
         return DiaryResponseDTO.builder()
+                .userPK(user.getId())
+
                 .happiness(emotion.getHappiness())
                 .sadness(emotion.getSadness())
                 .anxiety(emotion.getAnxiety())
                 .stress(emotion.getStress())
-                .sleepTime(emotion.getSleepTime())
+                .stress(emotion.getStress())
+
+                .content(diary.getContent())
                 .build();
     }
 }
