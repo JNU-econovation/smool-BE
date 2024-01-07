@@ -18,7 +18,7 @@ public class EmotionService {
 
     private final EmotionRepository emotionRepository;
 
-    public void join(DiaryCreateRequestDTO diaryCreateRequestDTO){
+    public Emotion join(DiaryCreateRequestDTO diaryCreateRequestDTO){
 
         Emotion emotion = Emotion.builder()
                 .happiness(diaryCreateRequestDTO.getHappiness())
@@ -28,7 +28,7 @@ public class EmotionService {
                 .sleepTime(diaryCreateRequestDTO.getSleepTime())
                 .diaries(new ArrayList<>())
                 .build();
-        emotionRepository.save(emotion);
+        return emotionRepository.save(emotion);
     }
 
     public void updateEmotion(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
