@@ -1,13 +1,11 @@
-package econovation.moodtracker.domain.emotion;
+package econovation.moodtracker.domain;
 
-import econovation.moodtracker.domain.diary.Diary;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.*;
 
 @Entity

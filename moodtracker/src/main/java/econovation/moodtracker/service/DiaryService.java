@@ -1,6 +1,6 @@
 package econovation.moodtracker.service;
 
-import econovation.moodtracker.domain.diary.Diary;
+import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.repository.DiaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

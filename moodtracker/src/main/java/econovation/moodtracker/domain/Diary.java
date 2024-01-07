@@ -1,7 +1,5 @@
-package econovation.moodtracker.domain.diary;
+package econovation.moodtracker.domain;
 
-import econovation.moodtracker.domain.emotion.Emotion;
-import econovation.moodtracker.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
