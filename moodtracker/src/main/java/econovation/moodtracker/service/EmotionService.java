@@ -1,8 +1,7 @@
 package econovation.moodtracker.service;
 
 
-import econovation.moodtracker.domain.dto.Request.EmotionCreateRequestDTO;
-import econovation.moodtracker.domain.dto.Response.EmotionResponseDTO;
+import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
 import econovation.moodtracker.domain.emotion.Emotion;
 import econovation.moodtracker.domain.user.User;
 import econovation.moodtracker.repository.EmotionRepository;
@@ -20,21 +19,18 @@ public class EmotionService {
 
     private final EmotionRepository emotionRepository;
     private final UserRepository userRepository;
+    public void join(DiaryCreateRequestDTO diaryCreateRequestDTO){
 
-    public EmotionResponseDTO join(EmotionCreateRequestDTO emotionCreateRequestDTO){
-
-        User user = userRepository.findById(emotionCreateRequestDTO.getUserPK())
+        User user = userRepository.findById(diaryCreateRequestDTO.getUserPK())
                 .orElseThrow(()->new IllegalArgumentException("아이디 없음"));
         Emotion emotion = Emotion.builder()
-                .happiness(emotionCreateRequestDTO.getHappiness())
-                .sadness(emotionCreateRequestDTO.getSadness())
-                .anxiety(emotionCreateRequestDTO.getAnxiety())
-                .stress(emotionCreateRequestDTO.getStress())
-                .sleepTime(emotionCreateRequestDTO.getSleepTime())
+                .happiness(diaryCreateRequestDTO.getHappiness())
+                .sadness(diaryCreateRequestDTO.getSadness())
+                .anxiety(diaryCreateRequestDTO.getAnxiety())
+                .stress(diaryCreateRequestDTO.getStress())
+                .sleepTime(diaryCreateRequestDTO.getSleepTime())
                 .diaries(new ArrayList<>())
                 .build();
         emotionRepository.save(emotion);
-        return EmotionResponseDTO.of(emotion);
     }
-
 }
