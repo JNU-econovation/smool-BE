@@ -41,4 +41,8 @@ public class Diary {
         this.emotion = emotion;
         emotion.getDiaries().add(this);
     }
+
+    public void update(String content){
+        this.content = content;
+    }
 }
