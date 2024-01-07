@@ -17,7 +17,6 @@ import static lombok.AccessLevel.*;
 @AllArgsConstructor
 public class EmotionCreateRequestDTO {
     private Long userPK;
-    private LocalTime localTime;
     private Integer happiness;
     private Integer sadness;
     private Integer anxiety;
