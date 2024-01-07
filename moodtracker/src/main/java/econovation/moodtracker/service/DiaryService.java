@@ -16,4 +16,10 @@ public class DiaryService {
         diaryRepository.save(diary);
         return diary.getId();
     }
+    
+    public void updateDiary(Long diaryPK, String content){
+        Diary diary = diaryRepository.findById(diaryPK)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+        diary.update(content);
+    }
 }
