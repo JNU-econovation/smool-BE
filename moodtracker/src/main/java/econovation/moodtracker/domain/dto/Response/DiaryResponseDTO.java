@@ -23,8 +23,8 @@ public class DiaryResponseDTO {
 
 //DTO -> Entity = toEntity
 //Entity -> DTO = of
-// 일기 domain
-private Long userPK;
+    // 사용자 domain
+    private Long userPK;
     // 일기 domain
     private String content;
 
