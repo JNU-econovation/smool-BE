@@ -30,7 +30,7 @@ class EmotionServiceTest {
     @Autowired UserRepository userRepository;
 
     @Test
-    //@Rollback(value = false)
+    @Rollback(value = false)
     public void 감정저장(){
         //given
         userService.join(UserCreateRequestDTO
@@ -51,5 +51,44 @@ class EmotionServiceTest {
 
         //then
         assertEquals(emotionRepository.findAll().size(), 1);
+    }
+    @Test
+    @Rollback(value = false)
+    public void 두_명_감정_저장(){
+        //given
+        Long getUser1 = userService.join(UserCreateRequestDTO
+                .builder()
+                .userId("abc1")
+                .build()
+        );
+
+        Long getUser2 = userService.join(UserCreateRequestDTO
+                .builder()
+                .userId("abc2")
+                .build()
+        );
+
+        EmotionCreateRequestDTO emotionCreateRequestDTO1 = EmotionCreateRequestDTO.builder()
+                .userPK(getUser1)
+                .happiness(1)
+                .anxiety(2)
+                .sadness(3)
+                .stress(4)
+                .sleepTime(5)
+                .build();
+
+        EmotionCreateRequestDTO emotionCreateRequestDTO2 = EmotionCreateRequestDTO.builder()
+                .userPK(getUser2)
+                .happiness(1)
+                .anxiety(2)
+                .sadness(3)
+                .stress(4)
+                .sleepTime(5)
+                .build();
+        EmotionResponseDTO savedEmotionDTO1 = emotionService.join(emotionCreateRequestDTO1);
+        //when
+        EmotionResponseDTO savedEmotionDTO2 = emotionService.join(emotionCreateRequestDTO2);
+        //then
+        //assertEquals(emotionRepository.findAll().size(), 1);
     }
 }
