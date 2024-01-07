@@ -26,4 +26,12 @@ public class Emotion {
     private Integer anxiety;
     private Integer stress;
     private Integer sleepTime;
+
+    public void update(Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime){
+        this.happiness = happiness;
+        this.sadness = sadness;
+        this.anxiety = anxiety;
+        this.stress = stress;
+        this.sleepTime = sleepTime;
+    }
 }
