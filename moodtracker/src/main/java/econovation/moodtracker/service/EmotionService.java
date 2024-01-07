@@ -21,8 +21,6 @@ public class EmotionService {
     private final UserRepository userRepository;
     public void join(DiaryCreateRequestDTO diaryCreateRequestDTO){
 
-        User user = userRepository.findById(diaryCreateRequestDTO.getUserPK())
-                .orElseThrow(()->new IllegalArgumentException("아이디 없음"));
         Emotion emotion = Emotion.builder()
                 .happiness(diaryCreateRequestDTO.getHappiness())
                 .sadness(diaryCreateRequestDTO.getSadness())
