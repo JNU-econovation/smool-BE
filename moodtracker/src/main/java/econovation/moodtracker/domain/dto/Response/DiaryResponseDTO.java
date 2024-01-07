@@ -22,20 +22,18 @@ public class DiaryResponseDTO {
 //    LocalDateTime localDateTime = LocalDateTime.now();
 //    LocalTime localTime = localDateTime.toLocalTime();
 
-    //DTO -> Entity = toEntity
+//DTO -> Entity = toEntity
 //Entity -> DTO = of
     // 사용자 domain
     private Long userPK;
-    // 일기 domain
-    private String content;
-
     // 감정 domain
     private Integer happiness;
     private Integer sadness;
     private Integer anxiety;
     private Integer stress;
     private Integer sleepTime;
-
+    // 일기 domain
+    private String content;
 
     public static DiaryResponseDTO of(User user, Emotion emotion, Diary diary) {
         return DiaryResponseDTO.builder()
