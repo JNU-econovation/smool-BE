@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class EmotionService {
 
     private final EmotionRepository emotionRepository;
-    private final UserRepository userRepository;
+
     public void join(DiaryCreateRequestDTO diaryCreateRequestDTO){
 
         Emotion emotion = Emotion.builder()
