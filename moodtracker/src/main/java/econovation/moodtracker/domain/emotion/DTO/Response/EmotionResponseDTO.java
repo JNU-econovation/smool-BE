@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
+
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
@@ -13,6 +15,7 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
 public class EmotionResponseDTO {
+    private LocalTime localTime;
     private Integer happiness;
     private Integer sadness;
     private Integer anxiety;
@@ -22,6 +25,7 @@ public class EmotionResponseDTO {
     //Entity -> DTO = of
     public static EmotionResponseDTO of(Emotion emotion){
         return EmotionResponseDTO.builder()
+                .localTime(LocalTime.now())
                 .happiness(emotion.getHappiness())
                 .sadness(emotion.getSadness())
                 .anxiety(emotion.getAnxiety())
