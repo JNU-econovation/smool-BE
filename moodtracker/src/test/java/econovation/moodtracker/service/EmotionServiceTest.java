@@ -1,13 +1,11 @@
 package econovation.moodtracker.service;
 
-import econovation.moodtracker.domain.emotion.DTO.Request.EmotionCreateRequestDTO;
-import econovation.moodtracker.domain.emotion.DTO.Response.EmotionResponseDTO;
-import econovation.moodtracker.domain.user.DTO.Request.UserCreateRequestDTO;
-import econovation.moodtracker.domain.user.User;
+import econovation.moodtracker.domain.dto.Request.EmotionCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Response.EmotionResponseDTO;
+import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.repository.DiaryRepository;
 import econovation.moodtracker.repository.EmotionRepository;
 import econovation.moodtracker.repository.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package econovation.moodtracker.domain.emotion.DTO.Response;
+package econovation.moodtracker.domain.dto.Response;
 
 import econovation.moodtracker.domain.emotion.Emotion;
 import lombok.AllArgsConstructor;

@@ -1,13 +1,12 @@
 package econovation.moodtracker.service;
 
-import econovation.moodtracker.domain.user.DTO.Request.UserCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.user.User;
 import econovation.moodtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

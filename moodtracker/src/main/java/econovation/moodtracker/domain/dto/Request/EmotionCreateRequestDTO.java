@@ -1,4 +1,4 @@
-package econovation.moodtracker.domain.emotion.DTO.Request;
+package econovation.moodtracker.domain.dto.Request;
 
 import econovation.moodtracker.domain.diary.Diary;
 import econovation.moodtracker.domain.emotion.Emotion;

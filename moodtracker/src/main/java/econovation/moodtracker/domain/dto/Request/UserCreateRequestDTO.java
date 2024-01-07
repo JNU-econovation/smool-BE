@@ -1,4 +1,4 @@
-package econovation.moodtracker.domain.user.DTO.Request;
+package econovation.moodtracker.domain.dto.Request;
 
 
 import lombok.AllArgsConstructor;
