@@ -27,7 +27,7 @@ public class DiaryResponseDTO {
     private Integer gloom;
     private Integer anxiety;
     private Integer stress;
-    private Integer sleepTime;
+    private Integer sleep;
     // 일기 domain
     private String content;
 
@@ -39,7 +39,7 @@ public class DiaryResponseDTO {
                 .gloom(emotion.getGloom())
                 .anxiety(emotion.getAnxiety())
                 .stress(emotion.getStress())
-                .stress(emotion.getStress())
+                .sleep(emotion.getSleep())
 
                 .content(diary.getContent())
                 .build();

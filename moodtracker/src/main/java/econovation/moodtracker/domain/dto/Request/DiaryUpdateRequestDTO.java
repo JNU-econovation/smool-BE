@@ -22,5 +22,5 @@ public class DiaryUpdateRequestDTO {
     private Integer gloom;
     private Integer anxiety;
     private Integer stress;
-    private Integer sleepTime;
+    private Integer sleep;
 }

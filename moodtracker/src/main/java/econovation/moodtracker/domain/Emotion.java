@@ -25,13 +25,13 @@ public class Emotion {
     private Integer gloom;
     private Integer anxiety;
     private Integer stress;
-    private Integer sleepTime;
+    private Integer sleep;
 
-    public void update(Integer happiness, Integer gloom, Integer anxiety, Integer stress, Integer sleepTime){
+    public void update(Integer happiness, Integer gloom, Integer anxiety, Integer stress, Integer sleep){
         this.happiness = happiness;
         this.gloom = gloom;
         this.anxiety = anxiety;
         this.stress = stress;
-        this.sleepTime = sleepTime;
+        this.sleep = sleep;
     }
 }

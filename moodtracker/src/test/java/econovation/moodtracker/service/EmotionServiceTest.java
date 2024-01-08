@@ -27,7 +27,7 @@ class EmotionServiceTest {
                 .happiness(1)
                 .stress(1)
                 .anxiety(1)
-                .sleepTime(1)
+                .sleep(1)
                 .gloom(1)
                 .build();
         //when

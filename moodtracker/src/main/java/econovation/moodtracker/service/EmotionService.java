@@ -25,7 +25,7 @@ public class EmotionService {
                 .gloom(diaryCreateRequestDTO.getGloom())
                 .anxiety(diaryCreateRequestDTO.getAnxiety())
                 .stress(diaryCreateRequestDTO.getStress())
-                .sleepTime(diaryCreateRequestDTO.getSleepTime())
+                .sleep(diaryCreateRequestDTO.getSleep())
                 .diaries(new ArrayList<>())
                 .build();
         return emotionRepository.save(emotion);
