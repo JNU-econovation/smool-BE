@@ -38,7 +38,7 @@ public class DiaryService {
                     .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
                     .emotion(emotionService.updateEmotion(diaryCreateRequestDTO))
                     .build();
-            
+            System.out.println("여기로 와야되는데 안옴==================");
         }else{
             diary = Diary.builder()
                     .time(joinedDateTime)
@@ -47,6 +47,7 @@ public class DiaryService {
                     .emotion(emotionService.join(diaryCreateRequestDTO))
                     .build();
             diaryRepository.save(diary);
+            System.out.println("여기로 안 와야되는데 옴==================");
         }
         return diary.getId();
     }
@@ -74,7 +75,7 @@ public class DiaryService {
     }
 
     public boolean isExistTodayEmotion(DiaryCreateRequestDTO diaryCreateRequestDTO){
-        List<Diary> getAllDiaries = getAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
-        return !getAllDiaries.isEmpty();
+        List<Diary> getTodayDiaries = getAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
+        return !getTodayDiaries.isEmpty();
     }
 }
