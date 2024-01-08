@@ -63,7 +63,8 @@ public class DiaryService {
                 .withMonth(localDate.getMonthValue())
                 .withDayOfMonth(localDate.getDayOfMonth())
                 .withHour(0)
-                .withMinute(0);
+                .withMinute(0)
+                .withSecond(0);
         LocalDateTime endTime = startTime
                 .withHour(23)
                 .withMinute(59)
