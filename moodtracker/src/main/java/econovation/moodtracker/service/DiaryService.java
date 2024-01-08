@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DiaryService {
     private final DiaryRepository diaryRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final EmotionService emotionService;
 
     public Long join(DiaryCreateRequestDTO diaryCreateRequestDTO){
@@ -30,13 +30,23 @@ public class DiaryService {
                 .withMonth(requestDTOLocalDate.getMonthValue())
                 .withDayOfMonth(requestDTOLocalDate.getDayOfMonth());
         boolean existTodayEmotion = isExistTodayEmotion(diaryCreateRequestDTO);
-
-        Diary diary = Diary.builder()
-                .time(joinedDateTime)
-                .content(diaryCreateRequestDTO.getContent())
-                .user(userRepository.findById(diaryCreateRequestDTO.getUserPK()).get())
-                .emotion(emotionService.join(diaryCreateRequestDTO))
-                .build();
+        Diary diary;
+        if (existTodayEmotion){
+            diary = Diary.builder()
+                    .time(joinedDateTime)
+                    .content(diaryCreateRequestDTO.getContent())
+                    .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
+                    .emotion(emotionService.updateEmotion(diaryCreateRequestDTO))
+                    .build();
+            
+        }else{
+            diary = Diary.builder()
+                    .time(joinedDateTime)
+                    .content(diaryCreateRequestDTO.getContent())
+                    .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
+                    .emotion(emotionService.join(diaryCreateRequestDTO))
+                    .build();
+        }
         diaryRepository.save(diary);
         return diary.getId();
     }
@@ -63,4 +73,8 @@ public class DiaryService {
         return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
     }
 
+    public boolean isExistTodayEmotion(DiaryCreateRequestDTO diaryCreateRequestDTO){
+        List<Diary> getAllDiaries = getAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
+        return !getAllDiaries.isEmpty();
+    }
 }
