@@ -55,21 +55,11 @@ public class EmotionService {
                 .withSecond(59);
 
         List<Diary> diaries = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, diaryCreateRequestDTO.getUserPK());
-        Emotion emotion;
-//        if (diaries.isEmpty()){
-//            emotion = this.join(diaryCreateRequestDTO);
-//        }
-//        else {
-//            Long emotionPK = diaries.get(0).getEmotion().getId();
-//            emotion = emotionRepository.findById(emotionPK).get();
-//            emotion.update(diaryCreateRequestDTO.getHappiness(), diaryCreateRequestDTO.getGloom(),
-//                    diaryCreateRequestDTO.getAnxiety(), diaryCreateRequestDTO.getStress(),
-//                    diaryCreateRequestDTO.getSleep());
-            emotion = diaries.get(0).getEmotion();
-            emotion.update(diaryCreateRequestDTO.getHappiness(), diaryCreateRequestDTO.getGloom(),
-                    diaryCreateRequestDTO.getAnxiety(), diaryCreateRequestDTO.getStress(),
-                    diaryCreateRequestDTO.getSleep());
-//        }
+        Emotion emotion = diaries.get(0).getEmotion();
+        emotion.update(diaryCreateRequestDTO.getHappiness(), diaryCreateRequestDTO.getGloom(),
+                       diaryCreateRequestDTO.getAnxiety(), diaryCreateRequestDTO.getStress(),
+                       diaryCreateRequestDTO.getSleep());
+
         return emotion;
     }
 
