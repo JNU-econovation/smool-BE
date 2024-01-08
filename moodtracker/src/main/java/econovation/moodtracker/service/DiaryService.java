@@ -46,8 +46,8 @@ public class DiaryService {
                     .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
                     .emotion(emotionService.join(diaryCreateRequestDTO))
                     .build();
+            diaryRepository.save(diary);
         }
-        diaryRepository.save(diary);
         return diary.getId();
     }
 
