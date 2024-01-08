@@ -12,6 +12,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,6 +47,8 @@ class DiaryServiceTest {
         */
         DiaryCreateRequestDTO diaryCreateRequestDTO = DiaryCreateRequestDTO
                 .builder()
+                .localDate(LocalDate.now())
+
                 .happiness(1)
                 .stress(1)
                 .anxiety(1)
@@ -58,6 +61,8 @@ class DiaryServiceTest {
 
         DiaryCreateRequestDTO diaryCreateRequestDTO1 = DiaryCreateRequestDTO
                 .builder()
+                .localDate(LocalDate.now())
+
                 .happiness(1)
                 .stress(1)
                 .anxiety(1)
