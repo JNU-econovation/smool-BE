@@ -28,7 +28,7 @@ class EmotionServiceTest {
                 .stress(1)
                 .anxiety(1)
                 .sleepTime(1)
-                .sadness(1)
+                .gloom(1)
                 .build();
         //when
         emotionService.join(diaryCreateRequestDTO);

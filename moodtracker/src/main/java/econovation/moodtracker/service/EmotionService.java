@@ -22,7 +22,7 @@ public class EmotionService {
 
         Emotion emotion = Emotion.builder()
                 .happiness(diaryCreateRequestDTO.getHappiness())
-                .sadness(diaryCreateRequestDTO.getSadness())
+                .gloom(diaryCreateRequestDTO.getGloom())
                 .anxiety(diaryCreateRequestDTO.getAnxiety())
                 .stress(diaryCreateRequestDTO.getStress())
                 .sleepTime(diaryCreateRequestDTO.getSleepTime())

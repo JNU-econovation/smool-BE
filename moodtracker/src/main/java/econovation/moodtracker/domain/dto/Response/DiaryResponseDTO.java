@@ -24,7 +24,7 @@ public class DiaryResponseDTO {
     private Long userPK;
     // 감정 domain
     private Integer happiness;
-    private Integer sadness;
+    private Integer gloom;
     private Integer anxiety;
     private Integer stress;
     private Integer sleepTime;
@@ -36,7 +36,7 @@ public class DiaryResponseDTO {
                 .userPK(user.getId())
 
                 .happiness(emotion.getHappiness())
-                .sadness(emotion.getSadness())
+                .gloom(emotion.getGloom())
                 .anxiety(emotion.getAnxiety())
                 .stress(emotion.getStress())
                 .stress(emotion.getStress())

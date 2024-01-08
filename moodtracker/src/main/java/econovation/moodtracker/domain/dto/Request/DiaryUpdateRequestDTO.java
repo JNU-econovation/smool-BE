@@ -19,7 +19,7 @@ public class DiaryUpdateRequestDTO {
     // 감정 domain
     private Long emotionPK;
     private Integer happiness;
-    private Integer sadness;
+    private Integer gloom;
     private Integer anxiety;
     private Integer stress;
     private Integer sleepTime;

@@ -18,7 +18,7 @@ public class DiaryCreateRequestDTO {
 
     // 감정 domain
     private Integer happiness;
-    private Integer sadness;
+    private Integer gloom;
     private Integer anxiety;
     private Integer stress;
     private Integer sleepTime;

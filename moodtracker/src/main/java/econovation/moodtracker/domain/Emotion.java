@@ -22,14 +22,14 @@ public class Emotion {
     @OneToMany(mappedBy = "emotion", fetch = LAZY)
     private List<Diary> diaries = new ArrayList<>();
     private Integer happiness;
-    private Integer sadness;
+    private Integer gloom;
     private Integer anxiety;
     private Integer stress;
     private Integer sleepTime;
 
-    public void update(Integer happiness, Integer sadness, Integer anxiety, Integer stress, Integer sleepTime){
+    public void update(Integer happiness, Integer gloom, Integer anxiety, Integer stress, Integer sleepTime){
         this.happiness = happiness;
-        this.sadness = sadness;
+        this.gloom = gloom;
         this.anxiety = anxiety;
         this.stress = stress;
         this.sleepTime = sleepTime;
