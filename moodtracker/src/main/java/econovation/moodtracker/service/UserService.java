@@ -34,7 +34,7 @@ public class UserService {
         }
     }
 
-    private User getUser(Long userPK){
+    public User getUser(Long userPK){
         return userRepository.findById(userPK)
                 .orElseThrow(() -> new NullPointerException("사람이 없어용"));
     }
