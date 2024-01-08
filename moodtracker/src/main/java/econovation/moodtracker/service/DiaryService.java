@@ -38,7 +38,6 @@ public class DiaryService {
                     .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
                     .emotion(emotionService.updateEmotion(diaryCreateRequestDTO))
                     .build();
-            System.out.println("여기로 와야되는데 안옴==================");
         }else{
             diary = Diary.builder()
                     .time(joinedDateTime)
@@ -46,9 +45,8 @@ public class DiaryService {
                     .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
                     .emotion(emotionService.join(diaryCreateRequestDTO))
                     .build();
-            diaryRepository.save(diary);
-            System.out.println("여기로 안 와야되는데 옴==================");
         }
+        diaryRepository.save(diary);
         return diary.getId();
     }
 
