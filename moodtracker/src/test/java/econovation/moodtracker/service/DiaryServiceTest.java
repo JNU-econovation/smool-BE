@@ -63,11 +63,11 @@ class DiaryServiceTest {
                 .builder()
                 .localDate(LocalDate.now())
 
-                .happiness(1)
-                .stress(1)
-                .anxiety(1)
-                .sleep(1)
-                .gloom(1)
+                .happiness(2)
+                .stress(2)
+                .anxiety(2)
+                .sleep(2)
+                .gloom(2)
 
                 .content("dafd")
                 .userPK(savedId)
