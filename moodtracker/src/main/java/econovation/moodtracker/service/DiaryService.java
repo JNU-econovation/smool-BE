@@ -48,8 +48,17 @@ public class DiaryService {
     }
 
     public List<Diary> getAllDiaries(LocalDate localDate, Long userPK){
-        LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0);
-        LocalDateTime endTime = LocalDateTime.now().withHour(11).withMinute(59).withSecond(59);
+
+        LocalDateTime startTime = LocalDateTime.now()
+                .withYear(localDate.getYear())
+                .withMonth(localDate.getMonthValue())
+                .withDayOfMonth(localDate.getDayOfMonth())
+                .withHour(0)
+                .withMinute(0);
+        LocalDateTime endTime = startTime
+                .withHour(11)
+                .withMinute(59)
+                .withSecond(59);
 
         return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
     }
