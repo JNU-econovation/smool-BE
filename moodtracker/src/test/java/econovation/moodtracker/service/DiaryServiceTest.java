@@ -96,6 +96,8 @@ class DiaryServiceTest {
         */
         DiaryCreateRequestDTO diaryCreateRequestDTO = DiaryCreateRequestDTO
                 .builder()
+                .localDate(LocalDate.now())
+
                 .happiness(1)
                 .stress(1)
                 .anxiety(1)
@@ -112,5 +114,6 @@ class DiaryServiceTest {
         LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0);
         LocalDateTime endTime = LocalDateTime.now().withHour(11).withMinute(59).withSecond(59);
         List<Diary> allByTimeBetweenAndUserId = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, savedId);
+        assertEquals(allByTimeBetweenAndUserId.size(), 1);
     }
 }
