@@ -31,8 +31,8 @@ public class EmotionService {
         return emotionRepository.save(emotion);
     }
 
-    public void updateEmotion(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
-        Emotion Emotion = emotionRepository.findById(diaryUpdateRequestDTO.getEmotionPK())
+    public Emotion updateEmotion(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
+        return emotionRepository.findById(diaryUpdateRequestDTO.getEmotionPK())
                 .orElseThrow(() -> new NullPointerException("감정이 없어용"));
     }
 }
