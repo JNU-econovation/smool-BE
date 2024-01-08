@@ -33,4 +33,9 @@ public class UserService {
             throw new IllegalStateException("이미 존재하는 아이디입니다.");
         }
     }
+
+    private User getUser(Long userPK){
+        return userRepository.findById(userPK)
+                .orElseThrow(() -> new NullPointerException("사람이 없어용"));
+    }
 }
