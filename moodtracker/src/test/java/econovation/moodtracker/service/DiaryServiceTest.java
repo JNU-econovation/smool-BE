@@ -27,7 +27,7 @@ class DiaryServiceTest {
     @Autowired DiaryService diaryService;
     @Autowired DiaryRepository diaryRepository;
     @Test
-    @Rollback(value = false)
+    //@Rollback(value = false)
     public void 일기저장(){
         //given
         /*
@@ -79,7 +79,7 @@ class DiaryServiceTest {
         //then
     }
     @Test
-    @Rollback(value = false)
+    //@Rollback(value = false)
     public void 일기찾기(){
         //given
         String userId = "abc123";

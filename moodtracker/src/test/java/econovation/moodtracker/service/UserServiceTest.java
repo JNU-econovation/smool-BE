@@ -22,7 +22,7 @@ class UserServiceTest {
     @Autowired UserRepository userRepository;
 
     @Test
-    @Rollback(false)
+    //@Rollback(false)
     public void 회원가입() throws Exception{
         //given
         String userId = "abc123";
@@ -46,6 +46,7 @@ class UserServiceTest {
     }
 
     @Test
+    //@Rollback(value = false)
     public void 중복_회원_예외() throws Exception{
         //given
         String userId = "abc123";
