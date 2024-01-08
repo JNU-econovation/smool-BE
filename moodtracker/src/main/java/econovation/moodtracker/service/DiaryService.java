@@ -23,11 +23,11 @@ public class DiaryService {
     private final EmotionService emotionService;
 
     public Long join(DiaryCreateRequestDTO diaryCreateRequestDTO){
-        LocalDate localDate = diaryCreateRequestDTO.getLocalDate();
+        LocalDate requestDTOLocalDate = diaryCreateRequestDTO.getLocalDate();
         LocalDateTime joinedDateTime = LocalDateTime.now()
-                .withYear(localDate.getYear())
-                .withMonth(localDate.getMonthValue())
-                .withDayOfMonth(localDate.getDayOfMonth());
+                .withYear(requestDTOLocalDate.getYear())
+                .withMonth(requestDTOLocalDate.getMonthValue())
+                .withDayOfMonth(requestDTOLocalDate.getDayOfMonth());
 
         Diary diary = Diary.builder()
                 .time(joinedDateTime)
