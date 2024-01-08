@@ -50,7 +50,7 @@ public class EmotionService {
                 .withHour(0)
                 .withMinute(0);
         LocalDateTime endTime = startTime
-                .withHour(11)
+                .withHour(23)
                 .withMinute(59)
                 .withSecond(59);
 

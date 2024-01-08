@@ -69,7 +69,7 @@ class DiaryServiceTest {
                 .sleep(2)
                 .gloom(2)
 
-                .content("dafd")
+                .content("bbbbb")
                 .userPK(savedId)
                 .build();
         //when
@@ -79,7 +79,7 @@ class DiaryServiceTest {
         //then
     }
     @Test
-    //@Rollback(value = false)
+    @Rollback(value = false)
     public void 일기찾기(){
         //given
         String userId = "abc123";
@@ -112,7 +112,9 @@ class DiaryServiceTest {
         diaryService.join(diaryCreateRequestDTO);
         //then
         LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0);
+        startTime = LocalDateTime.of(2024,1,1,0,0,0);
         LocalDateTime endTime = LocalDateTime.now().withHour(11).withMinute(59).withSecond(59);
+        endTime = LocalDateTime.of(2024,12,1,11,59,59);
         List<Diary> allByTimeBetweenAndUserId = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, savedId);
         assertEquals(allByTimeBetweenAndUserId.size(), 1);
     }
