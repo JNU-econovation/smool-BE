@@ -21,7 +21,6 @@ public class DiaryCreateRequestDTO {
     private String content;
 
     // 감정 domain
-    private Long emotionPK;
     private Integer happiness;
     private Integer gloom;
     private Integer anxiety;
