@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Service
 @Transactional
@@ -21,8 +23,14 @@ public class DiaryService {
     private final EmotionService emotionService;
 
     public Long join(DiaryCreateRequestDTO diaryCreateRequestDTO){
+        LocalDate localDate = diaryCreateRequestDTO.getLocalDate();
+        LocalDateTime joinedDateTime = LocalDateTime.now()
+                .withYear(localDate.getYear())
+                .withMonth(localDate.getMonthValue())
+                .withDayOfMonth(localDate.getDayOfMonth());
+
         Diary diary = Diary.builder()
-                .time(LocalDateTime.now())
+                .time(joinedDateTime)
                 .content(diaryCreateRequestDTO.getContent())
                 .user(userRepository.findById(diaryCreateRequestDTO.getUserPK()).get())
                 .emotion(emotionService.join(diaryCreateRequestDTO))
@@ -30,7 +38,7 @@ public class DiaryService {
         diaryRepository.save(diary);
         return diary.getId();
     }
-    
+
     public void updateDiary(Long diaryPK, String content){
         Diary diary = diaryRepository.findById(diaryPK)
                 .orElseThrow(() -> new NullPointerException("일기가 없어용"));
