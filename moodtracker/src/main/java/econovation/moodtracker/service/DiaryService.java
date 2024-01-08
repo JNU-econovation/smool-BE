@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -28,6 +29,7 @@ public class DiaryService {
                 .withYear(requestDTOLocalDate.getYear())
                 .withMonth(requestDTOLocalDate.getMonthValue())
                 .withDayOfMonth(requestDTOLocalDate.getDayOfMonth());
+        boolean existTodayEmotion = isExistTodayEmotion(diaryCreateRequestDTO);
 
         Diary diary = Diary.builder()
                 .time(joinedDateTime)
@@ -44,4 +46,12 @@ public class DiaryService {
                 .orElseThrow(() -> new NullPointerException("일기가 없어용"));
         diary.update(content);
     }
+
+    public List<Diary> getAllDiaries(LocalDate localDate, Long userPK){
+        LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0);
+        LocalDateTime endTime = LocalDateTime.now().withHour(11).withMinute(59).withSecond(59);
+
+        return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
+    }
+
 }
