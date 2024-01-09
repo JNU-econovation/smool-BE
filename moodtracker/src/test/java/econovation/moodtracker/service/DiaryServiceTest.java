@@ -39,15 +39,13 @@ class DiaryServiceTest {
         일기 작성
         */
         DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId, "bbbb");
-
         DiaryCreateRequestDTO diaryCreateRequestDTO1 = createDiary(2,2,2,2,2,savedId,"cccc");
         //when
-        diaryService.join(diaryCreateRequestDTO);
-        diaryService.join(diaryCreateRequestDTO1);
+        Long savedId1 = diaryService.join(diaryCreateRequestDTO);
+        Long savedId2 = diaryService.join(diaryCreateRequestDTO1);
 
         //then
-        List<Diary> allDiaries = diaryService.findAllDiaries(LocalDate.now(), savedId);
-        assertEquals(allDiaries.get(0).getEmotion(), allDiaries.get(1).getEmotion());
+        assertEquals(diaryService.findDiary(savedId1).getEmotion(), diaryService.findDiary(savedId2).getEmotion());
     }
     @Test
     //@Rollback(value = false)
