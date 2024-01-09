@@ -1,5 +1,6 @@
 package econovation.moodtracker.service;
 
+import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
 import econovation.moodtracker.repository.EmotionRepository;
 import org.junit.jupiter.api.Test;
@@ -38,5 +39,17 @@ class EmotionServiceTest {
                 .sleep(1)
                 .gloom(1)
                 .build();
+    }
+    @Test
+    //@Rollback(value = false)
+    public void 감정삭제(){
+        //given
+        DiaryCreateRequestDTO diaryCreateRequestDTO = createEmotion();
+        Emotion emotion = emotionService.join(diaryCreateRequestDTO);
+        Long emotionId = emotion.getId();
+        //when
+        emotionService.deleteEmotion(emotionId);
+        //then
+        assertEquals(emotionRepository.findAll().size(), 0);
     }
 }
