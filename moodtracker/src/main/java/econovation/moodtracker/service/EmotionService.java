@@ -37,8 +37,14 @@ public class EmotionService {
     }
 
     public Emotion updateEmotion(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
-        return emotionRepository.findById(diaryUpdateRequestDTO.getEmotionPK())
+        Emotion emotion = emotionRepository.findById(diaryUpdateRequestDTO.getEmotionPK())
                 .orElseThrow(() -> new NullPointerException("감정이 없어용"));
+        emotion.update(diaryUpdateRequestDTO.getHappiness(),
+                diaryUpdateRequestDTO.getGloom(),
+                diaryUpdateRequestDTO.getAnxiety(),
+                diaryUpdateRequestDTO.getStress(),
+                diaryUpdateRequestDTO.getSleep());
+        return emotion;
     }
 
     public Emotion updateEmotion(DiaryCreateRequestDTO diaryCreateRequestDTO){
