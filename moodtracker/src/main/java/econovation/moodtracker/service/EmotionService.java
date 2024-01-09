@@ -63,7 +63,7 @@ public class EmotionService {
         return emotion;
     }
 
-    public Emotion getEmotion(Long emotionPK){
+    public Emotion findEmotion(Long emotionPK){
         return emotionRepository.findById(emotionPK)
                 .orElseThrow(() -> new NullPointerException("감정이 없어용"));
     }
