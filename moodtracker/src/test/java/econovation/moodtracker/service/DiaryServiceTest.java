@@ -90,6 +90,17 @@ class DiaryServiceTest {
         //then
         assertEquals(diaryService.findDiary(1L).getContent(), "updated updated");
     }
+    @Test
+    @Rollback(value = false)
+    public void 일기삭제(){
+        //given
+        Long savedId =createUser();
+        //when
+        DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId,"bbbb");
+        diaryService.join(diaryCreateRequestDTO);
+        //then
+        diaryService.deleteDiary(1L);
+    }
 
     private Long createUser() {
         String userId = "abc123";
