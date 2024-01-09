@@ -2,6 +2,8 @@ package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
+import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.repository.EmotionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +13,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -18,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmotionServiceTest {
     @Autowired EmotionService emotionService;
     @Autowired EmotionRepository emotionRepository;
+    @Autowired UserService userService;
 
     @Test
     //@Rollback(value = false)
@@ -50,6 +55,34 @@ class EmotionServiceTest {
                 .anxiety(1)
                 .sleep(1)
                 .gloom(1)
+                .build();
+    }
+
+    private Long createUser() {
+        String userId = "abc123";
+        String password = "123abc";
+
+        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
+                .userId(userId)
+                .password(password)
+                .build();
+
+        return userService.join(userCreateRequestDTO);
+    }
+
+    private DiaryCreateRequestDTO createDiary(Integer happiness, Integer stress, Integer anxiety, Integer sleep, Integer gloom, Long savedId, String content) {
+        return DiaryCreateRequestDTO
+                .builder()
+                .localDate(LocalDate.now())
+
+                .happiness(happiness)
+                .stress(stress)
+                .anxiety(anxiety)
+                .sleep(sleep)
+                .gloom(gloom)
+
+                .content(content)
+                .userPK(savedId)
                 .build();
     }
 }
