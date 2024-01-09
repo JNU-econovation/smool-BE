@@ -67,4 +67,8 @@ public class EmotionService {
         return emotionRepository.findById(emotionPK)
                 .orElseThrow(() -> new NullPointerException("감정이 없어용"));
     }
+
+    public void deleteEmotion(Long emotionPK){
+        emotionRepository.delete(findEmotion(emotionPK));
+    }
 }
