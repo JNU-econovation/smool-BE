@@ -122,7 +122,7 @@ class DiaryServiceTest {
         assertEquals(allByTimeBetweenAndUserId.size(), 1);
     }
     @Test
-    @Rollback(value = false)
+    //@Rollback(value = false)
     public void 일기수정(){
         //given
         String userId = "abc123";
@@ -160,6 +160,6 @@ class DiaryServiceTest {
                 .build();
         diaryService.updateDiary(diaryUpdateRequestDTO.getDiaryPK(), diaryUpdateRequestDTO.getContent());
         //then
-        assertEquals(diaryService.getDiary(1L).getContent(), "updated updated");
+        assertEquals(diaryService.findDiary(1L).getContent(), "updated updated");
     }
 }

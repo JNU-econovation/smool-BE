@@ -51,10 +51,10 @@ public class DiaryService {
     }
 
     public void updateDiary(Long diaryPK, String content){
-        Diary diary = getDiary(diaryPK);
+        Diary diary = findDiary(diaryPK);
         diary.update(content);
     }
-    public Diary getDiary(Long diaryPK){
+    public Diary findDiary(Long diaryPK){
         return diaryRepository.findById(diaryPK)
                 .orElseThrow(() -> new NullPointerException("일기가 없어용"));
     }
