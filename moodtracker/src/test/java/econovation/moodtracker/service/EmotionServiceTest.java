@@ -29,17 +29,6 @@ class EmotionServiceTest {
         //then
         assertEquals(emotionRepository.findAll().size(), 1);
     }
-
-    private DiaryCreateRequestDTO createEmotion() {
-        return DiaryCreateRequestDTO
-                .builder()
-                .happiness(1)
-                .stress(1)
-                .anxiety(1)
-                .sleep(1)
-                .gloom(1)
-                .build();
-    }
     @Test
     //@Rollback(value = false)
     public void 감정삭제(){
@@ -51,5 +40,16 @@ class EmotionServiceTest {
         emotionService.deleteEmotion(emotionId);
         //then
         assertEquals(emotionRepository.findAll().size(), 0);
+    }
+
+    private DiaryCreateRequestDTO createEmotion() {
+        return DiaryCreateRequestDTO
+                .builder()
+                .happiness(1)
+                .stress(1)
+                .anxiety(1)
+                .sleep(1)
+                .gloom(1)
+                .build();
     }
 }
