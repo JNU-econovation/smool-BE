@@ -2,6 +2,7 @@ package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
 import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.repository.DiaryRepository;
 import org.junit.jupiter.api.Test;
@@ -119,5 +120,46 @@ class DiaryServiceTest {
         endTime = LocalDateTime.of(2024,12,1,11,59,59);
         List<Diary> allByTimeBetweenAndUserId = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, savedId);
         assertEquals(allByTimeBetweenAndUserId.size(), 1);
+    }
+    @Test
+    @Rollback(value = false)
+    public void 일기수정(){
+        //given
+        String userId = "abc123";
+        String password = "123abc";
+
+        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
+                .userId(userId)
+                .password(password)
+                .build();
+
+        Long savedId = userService.join(userCreateRequestDTO);
+        /*
+        일기 작성
+        */
+        DiaryCreateRequestDTO diaryCreateRequestDTO = DiaryCreateRequestDTO
+                .builder()
+                .localDate(LocalDate.now())
+
+                .happiness(1)
+                .stress(1)
+                .anxiety(1)
+                .sleep(1)
+                .gloom(1)
+
+                .content("dafd")
+                .userPK(savedId)
+                .build();
+        diaryService.join(diaryCreateRequestDTO);
+        //when
+        DiaryUpdateRequestDTO diaryUpdateRequestDTO = DiaryUpdateRequestDTO
+                .builder()
+                .diaryPK(1L)
+                .content("updated updated")
+
+                .build();
+        diaryService.updateDiary(diaryUpdateRequestDTO.getDiaryPK(), diaryUpdateRequestDTO.getContent());
+        //then
+        assertEquals(diaryService.getDiary(1L).getContent(), "updated updated");
     }
 }
