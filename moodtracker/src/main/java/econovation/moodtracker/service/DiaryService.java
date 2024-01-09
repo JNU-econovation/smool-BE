@@ -51,11 +51,13 @@ public class DiaryService {
     }
 
     public void updateDiary(Long diaryPK, String content){
-        Diary diary = diaryRepository.findById(diaryPK)
-                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+        Diary diary = getDiary(diaryPK);
         diary.update(content);
     }
-
+    public Diary getDiary(Long diaryPK){
+        return diaryRepository.findById(diaryPK)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+    }
     public List<Diary> getAllDiaries(LocalDate localDate, Long userPK){
 
         LocalDateTime startTime = LocalDateTime.now()
