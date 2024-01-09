@@ -20,8 +20,6 @@ public class DiaryResponseDTO {
 
 //DTO -> Entity = toEntity
 //Entity -> DTO = of
-    // 사용자 domain
-    private Long userPK;
     // 감정 domain
     private Integer happiness;
     private Integer gloom;
@@ -31,10 +29,8 @@ public class DiaryResponseDTO {
     // 일기 domain
     private String content;
 
-    public static DiaryResponseDTO of(User user, Emotion emotion, Diary diary) {
+    public static DiaryResponseDTO of(Emotion emotion, Diary diary) {
         return DiaryResponseDTO.builder()
-                .userPK(user.getId())
-
                 .happiness(emotion.getHappiness())
                 .gloom(emotion.getGloom())
                 .anxiety(emotion.getAnxiety())
