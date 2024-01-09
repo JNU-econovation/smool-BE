@@ -34,45 +34,13 @@ class DiaryServiceTest {
         /*
         회원 가입
         */
-        String userId = "abc123";
-        String password = "123abc";
-
-        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
-                .userId(userId)
-                .password(password)
-                .build();
-
-        Long savedId = userService.join(userCreateRequestDTO);
+        Long savedId = createUser();
         /*
         일기 작성
         */
-        DiaryCreateRequestDTO diaryCreateRequestDTO = DiaryCreateRequestDTO
-                .builder()
-                .localDate(LocalDate.now())
+        DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId, "bbbb");
 
-                .happiness(1)
-                .stress(1)
-                .anxiety(1)
-                .sleep(1)
-                .gloom(1)
-
-                .content("dafd")
-                .userPK(savedId)
-                .build();
-
-        DiaryCreateRequestDTO diaryCreateRequestDTO1 = DiaryCreateRequestDTO
-                .builder()
-                .localDate(LocalDate.now())
-
-                .happiness(2)
-                .stress(2)
-                .anxiety(2)
-                .sleep(2)
-                .gloom(2)
-
-                .content("bbbbb")
-                .userPK(savedId)
-                .build();
+        DiaryCreateRequestDTO diaryCreateRequestDTO1 = createDiary(2,2,2,2,2,savedId,"cccc");
         //when
         diaryService.join(diaryCreateRequestDTO);
         diaryService.join(diaryCreateRequestDTO1);
@@ -85,31 +53,11 @@ class DiaryServiceTest {
     //@Rollback(value = false)
     public void 일기찾기(){
         //given
-        String userId = "abc123";
-        String password = "123abc";
-
-        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
-                .userId(userId)
-                .password(password)
-                .build();
-
-        Long savedId = userService.join(userCreateRequestDTO);
+        Long savedId = createUser();
         /*
         일기 작성
         */
-        DiaryCreateRequestDTO diaryCreateRequestDTO = DiaryCreateRequestDTO
-                .builder()
-                .localDate(LocalDate.now())
-
-                .happiness(1)
-                .stress(1)
-                .anxiety(1)
-                .sleep(1)
-                .gloom(1)
-
-                .content("dafd")
-                .userPK(savedId)
-                .build();
+        DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId, "bbbb");
 
         //when
         diaryService.join(diaryCreateRequestDTO);
@@ -125,31 +73,11 @@ class DiaryServiceTest {
     //@Rollback(value = false)
     public void 일기수정(){
         //given
-        String userId = "abc123";
-        String password = "123abc";
-
-        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
-                .userId(userId)
-                .password(password)
-                .build();
-
-        Long savedId = userService.join(userCreateRequestDTO);
+        Long savedId = createUser();
         /*
         일기 작성
         */
-        DiaryCreateRequestDTO diaryCreateRequestDTO = DiaryCreateRequestDTO
-                .builder()
-                .localDate(LocalDate.now())
-
-                .happiness(1)
-                .stress(1)
-                .anxiety(1)
-                .sleep(1)
-                .gloom(1)
-
-                .content("dafd")
-                .userPK(savedId)
-                .build();
+        DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId, "bbbb");
         diaryService.join(diaryCreateRequestDTO);
         //when
         DiaryUpdateRequestDTO diaryUpdateRequestDTO = DiaryUpdateRequestDTO
@@ -161,5 +89,33 @@ class DiaryServiceTest {
         diaryService.updateDiary(diaryUpdateRequestDTO.getDiaryPK(), diaryUpdateRequestDTO.getContent());
         //then
         assertEquals(diaryService.findDiary(1L).getContent(), "updated updated");
+    }
+
+    private Long createUser() {
+        String userId = "abc123";
+        String password = "123abc";
+
+        UserCreateRequestDTO userCreateRequestDTO = UserCreateRequestDTO.builder()
+                .userId(userId)
+                .password(password)
+                .build();
+
+        return userService.join(userCreateRequestDTO);
+    }
+
+    private DiaryCreateRequestDTO createDiary(Integer happiness, Integer stress, Integer anxiety, Integer sleep, Integer gloom, Long savedId, String content) {
+        return DiaryCreateRequestDTO
+                .builder()
+                .localDate(LocalDate.now())
+
+                .happiness(happiness)
+                .stress(stress)
+                .anxiety(anxiety)
+                .sleep(sleep)
+                .gloom(gloom)
+
+                .content(content)
+                .userPK(savedId)
+                .build();
     }
 }
