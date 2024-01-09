@@ -35,6 +35,20 @@ class EmotionServiceTest {
         assertEquals(emotionRepository.findAll().size(), 1);
     }
     @Test
+    @Rollback(value = false)
+    public void 감정수정(){
+        //given
+        Long savedId = createUser();
+        DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId,"abcd");
+        emotionService.join(diaryCreateRequestDTO);
+        //when
+        DiaryUpdateRequestDTO diaryUpdateRequestDTO = updateDiary(1L, 4,4,4,4,4);
+        Emotion emotion = emotionService.updateEmotion(diaryUpdateRequestDTO);
+        //then
+        assertEquals(emotionService.findEmotion(emotion.getId()).getAnxiety(), 4);
+    }
+
+    @Test
     //@Rollback(value = false)
     public void 감정삭제(){
         //given
