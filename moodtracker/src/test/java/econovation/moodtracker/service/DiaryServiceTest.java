@@ -77,6 +77,8 @@ class DiaryServiceTest {
         diaryService.join(diaryCreateRequestDTO1);
 
         //then
+        List<Diary> allDiaries = diaryService.getAllDiaries(LocalDate.now(), savedId);
+        assertEquals(allDiaries.get(0).getEmotion(), allDiaries.get(1).getEmotion());
     }
     @Test
     //@Rollback(value = false)
