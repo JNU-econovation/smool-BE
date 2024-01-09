@@ -60,13 +60,11 @@ public class DiaryService {
     }
     public List<Diary> findAllDiaries(LocalDate localDate, Long userPK){
 
-        LocalDateTime startTime = LocalDateTime.now()
-                .withYear(localDate.getYear())
-                .withMonth(localDate.getMonthValue())
-                .withDayOfMonth(localDate.getDayOfMonth())
-                .withHour(0)
-                .withMinute(0)
-                .withSecond(0);
+        LocalDateTime startTime = LocalDateTime.of(
+                localDate.getYear(),
+                localDate.getMonthValue(),
+                localDate.getDayOfMonth(),
+                0, 0, 0);;
         LocalDateTime endTime = startTime
                 .withHour(23)
                 .withMinute(59)
