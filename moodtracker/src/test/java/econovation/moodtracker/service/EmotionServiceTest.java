@@ -35,7 +35,7 @@ class EmotionServiceTest {
         assertEquals(emotionRepository.findAll().size(), 1);
     }
     @Test
-    @Rollback(value = false)
+    //@Rollback(value = false)
     public void 감정수정(){
         //given
         Long savedId = createUser();
