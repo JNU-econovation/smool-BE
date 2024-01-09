@@ -75,6 +75,9 @@ public class DiaryService {
         return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
     }
 
+    public void deleteDiary(Long diaryPK){
+        diaryRepository.delete(findDiary(diaryPK));
+    }
     public boolean isExistTodayEmotion(DiaryCreateRequestDTO diaryCreateRequestDTO){
         List<Diary> getTodayDiaries = findAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
         return !getTodayDiaries.isEmpty();
