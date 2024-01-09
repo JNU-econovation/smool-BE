@@ -35,14 +35,14 @@ public class DiaryService {
             diary = Diary.builder()
                     .time(joinedDateTime)
                     .content(diaryCreateRequestDTO.getContent())
-                    .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
+                    .user(userService.findUser(diaryCreateRequestDTO.getUserPK()))
                     .emotion(emotionService.updateEmotion(diaryCreateRequestDTO))
                     .build();
         }else{
             diary = Diary.builder()
                     .time(joinedDateTime)
                     .content(diaryCreateRequestDTO.getContent())
-                    .user(userService.getUser(diaryCreateRequestDTO.getUserPK()))
+                    .user(userService.findUser(diaryCreateRequestDTO.getUserPK()))
                     .emotion(emotionService.join(diaryCreateRequestDTO))
                     .build();
         }
@@ -58,7 +58,7 @@ public class DiaryService {
         return diaryRepository.findById(diaryPK)
                 .orElseThrow(() -> new NullPointerException("일기가 없어용"));
     }
-    public List<Diary> getAllDiaries(LocalDate localDate, Long userPK){
+    public List<Diary> findAllDiaries(LocalDate localDate, Long userPK){
 
         LocalDateTime startTime = LocalDateTime.now()
                 .withYear(localDate.getYear())
@@ -76,7 +76,7 @@ public class DiaryService {
     }
 
     public boolean isExistTodayEmotion(DiaryCreateRequestDTO diaryCreateRequestDTO){
-        List<Diary> getTodayDiaries = getAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
+        List<Diary> getTodayDiaries = findAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
         return !getTodayDiaries.isEmpty();
     }
 }
