@@ -74,7 +74,14 @@ public class DiaryService {
     }
 
     public void deleteDiary(Long diaryPK){
-        diaryRepository.delete(findDiary(diaryPK));
+        Diary diary = findDiary(diaryPK);
+        Emotion emotion = diary.getEmotion();
+        Long emotionId = emotion.getId();
+        List<Diary> diaries = diaryRepository.findAllByEmotionId(emotionId);
+        if (diaries.size() == 1){
+            emotionService.deleteEmotion(emotionId);
+        }
+        diaryRepository.delete(diary);
     }
     public boolean isExistTodayEmotion(DiaryCreateRequestDTO diaryCreateRequestDTO){
         List<Diary> getTodayDiaries = findAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
