@@ -85,4 +85,17 @@ class EmotionServiceTest {
                 .userPK(savedId)
                 .build();
     }
+
+    private DiaryUpdateRequestDTO updateDiary(Long emotionPK, Integer happiness, Integer gloom,Integer anxiety,Integer stress,Integer sleep) {
+        return DiaryUpdateRequestDTO
+                .builder()
+
+                .emotionPK(emotionPK)
+                .happiness(happiness)
+                .gloom(gloom)
+                .anxiety(anxiety)
+                .stress(stress)
+                .sleep(sleep)
+                .build();
+    }
 }
