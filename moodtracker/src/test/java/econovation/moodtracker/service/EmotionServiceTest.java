@@ -22,7 +22,15 @@ class EmotionServiceTest {
     //@Rollback(value = false)
     public void 감정저장(){
         //given
-        DiaryCreateRequestDTO diaryCreateRequestDTO = DiaryCreateRequestDTO
+        DiaryCreateRequestDTO diaryCreateRequestDTO = createEmotion();
+        //when
+        emotionService.join(diaryCreateRequestDTO);
+        //then
+        assertEquals(emotionRepository.findAll().size(), 1);
+    }
+
+    private DiaryCreateRequestDTO createEmotion() {
+        return DiaryCreateRequestDTO
                 .builder()
                 .happiness(1)
                 .stress(1)
@@ -30,9 +38,5 @@ class EmotionServiceTest {
                 .sleep(1)
                 .gloom(1)
                 .build();
-        //when
-        emotionService.join(diaryCreateRequestDTO);
-        //then
-        assertEquals(emotionRepository.findAll().size(), 1);
     }
 }
