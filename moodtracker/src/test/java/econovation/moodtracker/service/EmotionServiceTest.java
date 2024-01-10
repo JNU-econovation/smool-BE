@@ -40,9 +40,9 @@ class EmotionServiceTest {
         //given
         Long savedId = createUser();
         DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId,"abcd");
-        emotionService.join(diaryCreateRequestDTO);
+        Emotion getEmotion = emotionService.join(diaryCreateRequestDTO);
         //when
-        DiaryUpdateRequestDTO diaryUpdateRequestDTO = updateDiary(1L, 4,4,4,4,4);
+        DiaryUpdateRequestDTO diaryUpdateRequestDTO = updateDiary(getEmotion.getId(), 4,4,4,4,4);
         Emotion emotion = emotionService.updateEmotion(diaryUpdateRequestDTO);
         //then
         assertEquals(emotionService.findEmotion(emotion.getId()).getAnxiety(), 4);
