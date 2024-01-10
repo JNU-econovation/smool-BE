@@ -70,7 +70,8 @@ public class DiaryService {
                 .withMinute(59)
                 .withSecond(59);
 
-        return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
+        return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
     }
     public DiaryResponseDTO findOneDiary(Long diaryPK){
         Diary diary = findDiary(diaryPK)

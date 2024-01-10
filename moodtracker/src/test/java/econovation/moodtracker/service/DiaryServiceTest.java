@@ -64,7 +64,8 @@ class DiaryServiceTest {
         startTime = LocalDateTime.of(2024,1,1,0,0,0);
         LocalDateTime endTime = LocalDateTime.now().withHour(11).withMinute(59).withSecond(59);
         endTime = LocalDateTime.of(2024,12,1,11,59,59);
-        List<Diary> allByTimeBetweenAndUserId = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, savedId);
+        List<Diary> allByTimeBetweenAndUserId = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, savedId)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
         assertEquals(allByTimeBetweenAndUserId.size(), 1);
     }
     @Test

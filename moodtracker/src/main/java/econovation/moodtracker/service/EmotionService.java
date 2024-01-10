@@ -59,7 +59,8 @@ public class EmotionService {
                 .withMinute(59)
                 .withSecond(59);
 
-        List<Diary> diaries = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, diaryCreateRequestDTO.getUserPK());
+        List<Diary> diaries = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, diaryCreateRequestDTO.getUserPK())
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
         Emotion emotion = diaries.get(0).getEmotion();
         emotion.update(diaryCreateRequestDTO.getHappiness(), diaryCreateRequestDTO.getGloom(),
                        diaryCreateRequestDTO.getAnxiety(), diaryCreateRequestDTO.getStress(),
