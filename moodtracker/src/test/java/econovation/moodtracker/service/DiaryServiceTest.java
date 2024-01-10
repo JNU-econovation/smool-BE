@@ -77,17 +77,17 @@ class DiaryServiceTest {
         일기 작성
         */
         DiaryCreateRequestDTO diaryCreateRequestDTO = createDiary(1,1,1,1,1,savedId, "bbbb");
-        diaryService.join(diaryCreateRequestDTO);
+        Long diaryId = diaryService.join(diaryCreateRequestDTO);
         //when
         DiaryUpdateRequestDTO diaryUpdateRequestDTO = DiaryUpdateRequestDTO
                 .builder()
-                .diaryPK(1L)
+                .diaryPK(diaryId)
                 .content("updated updated")
 
                 .build();
         diaryService.updateDiary(diaryUpdateRequestDTO.getDiaryPK(), diaryUpdateRequestDTO.getContent());
         //then
-        assertEquals(diaryService.findDiary(1L).get().getContent(), "updated updated");
+        assertEquals(diaryService.findDiary(diaryId).get().getContent(), "updated updated");
     }
     @Test
     //@Rollback(value = false)
