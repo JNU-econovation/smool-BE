@@ -26,13 +26,13 @@ public class DiaryLogResponseDTO {
     private Integer stress;
     private Integer sleep;
 
-    private List<OneDiaryLogResponseDTO> oneDiaryLogResponseDTOs;
+    private List<OneDiaryLogDTO> oneDiaryLogResponseDTOs;
 
     public static DiaryLogResponseDTO of(Emotion emotion){
         List<Diary> diaries = emotion.getDiaries();
-        List<OneDiaryLogResponseDTO> oneDiaryLogResponseDTOs = new ArrayList<>();
+        List<OneDiaryLogDTO> oneDiaryLogResponseDTOs = new ArrayList<>();
         for (Diary diary : diaries) {
-            oneDiaryLogResponseDTOs.add(OneDiaryLogResponseDTO.of(diary));
+            oneDiaryLogResponseDTOs.add(OneDiaryLogDTO.of(diary));
         }
         return DiaryLogResponseDTO.builder()
                 .happiness(emotion.getHappiness())
