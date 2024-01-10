@@ -58,7 +58,7 @@ public class DiaryService {
     public Optional<Diary> findDiary(Long diaryPK){
         return diaryRepository.findById(diaryPK);
     }
-    public List<Diary> findAllDiaries(LocalDate localDate, Long userPK){
+    public Optional<List<Diary>> findAllDiaries(LocalDate localDate, Long userPK){
 
         LocalDateTime startTime = LocalDateTime.of(
                 localDate.getYear(),
@@ -70,8 +70,7 @@ public class DiaryService {
                 .withMinute(59)
                 .withSecond(59);
 
-        return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK)
-                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+        return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
     }
     public DiaryResponseDTO findOneDiary(Long diaryPK){
         Diary diary = findDiary(diaryPK)
