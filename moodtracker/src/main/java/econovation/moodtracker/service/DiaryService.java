@@ -79,9 +79,6 @@ public class DiaryService {
         Diary diary = findDiary(diaryPK);
         return DiaryResponseDTO.of(diary.getEmotion(), diary);
     }
-    public OneDiaryLogResponseDTO findOneDiaryLog(LocalDate localDate){
-        return OneDiaryLogResponseDTO.builder().build();
-    }
 
     public DiaryLogResponseDTO findAllDiaryLog(LocalDate localDate){
         return DiaryLogResponseDTO.builder().build();
