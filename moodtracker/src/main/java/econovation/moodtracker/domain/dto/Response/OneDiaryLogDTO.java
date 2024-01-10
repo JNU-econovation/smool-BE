@@ -15,12 +15,12 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
 //일기 로그 조회할 때 일기 하나
-public class OneDiaryLogResponseDTO {
+public class OneDiaryLogDTO {
     private String content;
     private LocalTime localTime;
 
-    public static OneDiaryLogResponseDTO of(Diary diary){
-        return OneDiaryLogResponseDTO.builder()
+    public static OneDiaryLogDTO of(Diary diary){
+        return OneDiaryLogDTO.builder()
                 .content(diary.getContent())
                 .localTime(diary.getTime().toLocalTime())
                 .build();
