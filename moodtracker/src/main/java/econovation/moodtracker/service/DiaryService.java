@@ -80,9 +80,14 @@ public class DiaryService {
     }
 
     public DiaryLogResponseDTO findAllDiaryLog(LocalDate localDate, Long userPK){
-        //일기가 없을 때도 있어서 Optional로 받아야함
         List<Diary> diaries = findAllDiaries(localDate, userPK);
-        return DiaryLogResponseDTO.of(diaries.get(0).getEmotion());
+        if(diaries.isEmpty()){
+            //보내줄 일기가 없으면 프론트로 null값 보내줌
+            return null;
+        }
+        else {
+            return DiaryLogResponseDTO.of(diaries.get(0).getEmotion());
+        }
     }
 
     public void deleteDiary(Long diaryPK){
