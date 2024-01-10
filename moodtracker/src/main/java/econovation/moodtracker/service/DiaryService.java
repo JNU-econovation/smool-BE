@@ -5,18 +5,15 @@ import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
-import econovation.moodtracker.domain.dto.Response.OneDiaryLogResponseDTO;
 import econovation.moodtracker.repository.DiaryRepository;
-import econovation.moodtracker.repository.EmotionRepository;
-import econovation.moodtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -57,9 +54,8 @@ public class DiaryService {
         Diary diary = findDiary(diaryPK);
         diary.update(content);
     }
-    public Diary findDiary(Long diaryPK){
-        return diaryRepository.findById(diaryPK)
-                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+    public Optional<Diary> findDiary(Long diaryPK){
+        return diaryRepository.findById(diaryPK);
     }
     public List<Diary> findAllDiaries(LocalDate localDate, Long userPK){
 
@@ -80,8 +76,10 @@ public class DiaryService {
         return DiaryResponseDTO.of(diary.getEmotion(), diary);
     }
 
-    public DiaryLogResponseDTO findAllDiaryLog(LocalDate localDate){
-        return DiaryLogResponseDTO.builder().build();
+    public DiaryLogResponseDTO findAllDiaryLog(LocalDate localDate, Long userPK){
+        //일기가 없을 때도 있어서 Optional로 받아야함
+        List<Diary> diaries = findAllDiaries(localDate, userPK);
+        return DiaryLogResponseDTO.of(diaries.get(0).getEmotion());
     }
 
     public void deleteDiary(Long diaryPK){
