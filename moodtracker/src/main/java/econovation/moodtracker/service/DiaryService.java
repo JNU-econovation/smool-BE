@@ -3,6 +3,8 @@ package econovation.moodtracker.service;
 import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
+import econovation.moodtracker.domain.dto.Response.OneDiaryLogResponseDTO;
 import econovation.moodtracker.repository.DiaryRepository;
 import econovation.moodtracker.repository.EmotionRepository;
 import econovation.moodtracker.repository.UserRepository;
@@ -71,6 +73,13 @@ public class DiaryService {
                 .withSecond(59);
 
         return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
+    }
+    public OneDiaryLogResponseDTO findOneDiaryLog(LocalDate localDate){
+        return OneDiaryLogResponseDTO.builder().build();
+    }
+
+    public DiaryLogResponseDTO findAllDiaryLog(LocalDate localDate){
+        return DiaryLogResponseDTO.builder().build();
     }
 
     public void deleteDiary(Long diaryPK){
