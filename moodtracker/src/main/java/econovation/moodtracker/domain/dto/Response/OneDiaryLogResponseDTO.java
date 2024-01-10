@@ -1,5 +1,6 @@
 package econovation.moodtracker.domain.dto.Response;
 
+import econovation.moodtracker.domain.Diary;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,4 +18,11 @@ import static lombok.AccessLevel.PROTECTED;
 public class OneDiaryLogResponseDTO {
     private String content;
     private LocalTime localTime;
+
+    public static OneDiaryLogResponseDTO of(Diary diary){
+        return OneDiaryLogResponseDTO.builder()
+                .content(diary.getContent())
+                .localTime(diary.getTime().toLocalTime())
+                .build();
+    }
 }
