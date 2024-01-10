@@ -90,7 +90,7 @@ class DiaryServiceTest {
         assertEquals(diaryService.findDiary(1L).get().getContent(), "updated updated");
     }
     @Test
-    @Rollback(value = false)
+    //@Rollback(value = false)
     public void 일기삭제(){
         //given
         Long savedId =createUser();
