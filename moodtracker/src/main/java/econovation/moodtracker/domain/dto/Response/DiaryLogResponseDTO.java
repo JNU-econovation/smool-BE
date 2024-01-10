@@ -1,11 +1,14 @@
 package econovation.moodtracker.domain.dto.Response;
 
+import econovation.moodtracker.domain.Diary;
+import econovation.moodtracker.domain.Emotion;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;
@@ -24,4 +27,20 @@ public class DiaryLogResponseDTO {
     private Integer sleep;
 
     private List<OneDiaryLogResponseDTO> oneDiaryLogResponseDTOs;
+
+    public static DiaryLogResponseDTO of(Emotion emotion){
+        List<Diary> diaries = emotion.getDiaries();
+        List<OneDiaryLogResponseDTO> oneDiaryLogResponseDTOs = new ArrayList<>();
+        for (Diary diary : diaries) {
+            oneDiaryLogResponseDTOs.add(OneDiaryLogResponseDTO.of(diary));
+        }
+        return DiaryLogResponseDTO.builder()
+                .happiness(emotion.getHappiness())
+                .gloom(emotion.getGloom())
+                .anxiety(emotion.getAnxiety())
+                .stress(emotion.getStress())
+                .sleep(emotion.getSleep())
+                .oneDiaryLogResponseDTOs(oneDiaryLogResponseDTOs)
+                .build();
+    }
 }
