@@ -51,7 +51,8 @@ public class DiaryService {
     }
 
     public void updateDiary(Long diaryPK, String content){
-        Diary diary = findDiary(diaryPK);
+        Diary diary = findDiary(diaryPK)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
         diary.update(content);
     }
     public Optional<Diary> findDiary(Long diaryPK){
@@ -72,7 +73,8 @@ public class DiaryService {
         return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
     }
     public DiaryResponseDTO findOneDiary(Long diaryPK){
-        Diary diary = findDiary(diaryPK);
+        Diary diary = findDiary(diaryPK)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
         return DiaryResponseDTO.of(diary.getEmotion(), diary);
     }
 
@@ -83,7 +85,8 @@ public class DiaryService {
     }
 
     public void deleteDiary(Long diaryPK){
-        Diary diary = findDiary(diaryPK);
+        Diary diary = findDiary(diaryPK)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
         Emotion emotion = diary.getEmotion();
         Long emotionId = emotion.getId();
         List<Diary> diaries = diaryRepository.findAllByEmotionId(emotionId);
