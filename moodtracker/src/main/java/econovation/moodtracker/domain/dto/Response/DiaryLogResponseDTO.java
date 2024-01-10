@@ -14,6 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
+//일기 로그(감정 1, 일기 여러 개)
 public class DiaryLogResponseDTO {
     //일기가 있으면 보내기
     private Integer happiness;

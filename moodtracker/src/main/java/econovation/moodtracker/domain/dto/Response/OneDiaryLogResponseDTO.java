@@ -13,6 +13,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
+//일기 로그 조회할 때 일기 하나
 public class OneDiaryLogResponseDTO {
     private String content;
     private LocalTime localTime;

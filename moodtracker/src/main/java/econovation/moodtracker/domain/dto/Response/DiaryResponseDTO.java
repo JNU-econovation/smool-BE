@@ -14,6 +14,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
+//일기 조회 화면
 public class DiaryResponseDTO {
 //    LocalDateTime localDateTime = LocalDateTime.now();
 //    LocalTime localTime = localDateTime.toLocalTime();
