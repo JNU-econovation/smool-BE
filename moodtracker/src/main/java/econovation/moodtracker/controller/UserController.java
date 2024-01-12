@@ -16,8 +16,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/users/join")
-    public ResponseEntity<Boolean> join(@RequestBody UserCreateRequestDTO userCreateRequestDTO){
-        userService.join(userCreateRequestDTO);
-        return new ResponseEntity<>(true, HttpStatus.CREATED);
+    public ResponseEntity<Long> join(@RequestBody UserCreateRequestDTO userCreateRequestDTO){
+        Long userPK = userService.join(userCreateRequestDTO);
+        return new ResponseEntity<>(userPK, HttpStatus.CREATED);
     }
 }
