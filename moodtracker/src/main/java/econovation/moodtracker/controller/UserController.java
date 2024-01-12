@@ -2,6 +2,7 @@ package econovation.moodtracker.controller;
 
 import econovation.moodtracker.domain.User;
 import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Request.UserLoginRequestDTO;
 import econovation.moodtracker.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,5 +20,11 @@ public class UserController {
     public ResponseEntity<Long> join(@RequestBody UserCreateRequestDTO userCreateRequestDTO){
         Long userPK = userService.join(userCreateRequestDTO);
         return new ResponseEntity<>(userPK, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/users/join")
+    public ResponseEntity<Long> login(@RequestBody UserLoginRequestDTO userLoginRequestDTO){
+        Long userPK = userService.login(userLoginRequestDTO.getUserId(), userLoginRequestDTO.getPassword());
+        return new ResponseEntity<>(userPK, HttpStatus.OK);
     }
 }
