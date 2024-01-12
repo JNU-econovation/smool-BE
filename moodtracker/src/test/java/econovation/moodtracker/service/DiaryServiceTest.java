@@ -45,7 +45,7 @@ class DiaryServiceTest {
         Long savedId2 = diaryService.join(diaryCreateRequestDTO1);
 
         //then
-        assertEquals(diaryService.findDiary(savedId1).get().getEmotion(), diaryService.findDiary(savedId2).get().getEmotion());
+        assertEquals(diaryService.findDiary(savedId1).getEmotion(), diaryService.findDiary(savedId2).getEmotion());
     }
     @Test
     //@Rollback(value = false)
@@ -87,7 +87,7 @@ class DiaryServiceTest {
                 .build();
         diaryService.updateDiary(diaryUpdateRequestDTO.getDiaryPK(), diaryUpdateRequestDTO.getContent());
         //then
-        assertEquals(diaryService.findDiary(diaryId).get().getContent(), "updated updated");
+        assertEquals(diaryService.findDiary(diaryId).getContent(), "updated updated");
     }
     @Test
     //@Rollback(value = false)
