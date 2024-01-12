@@ -38,4 +38,15 @@ public class UserService {
         return userRepository.findById(userPK)
                 .orElseThrow(() -> new NullPointerException("사람이 없어용"));
     }
+
+    public Long login(String userId, String password){
+        User user = userRepository.findUserByUserId(userId)
+                .orElseThrow(() -> new NullPointerException("해당 아이디가 없어용"));
+        if (user.getPassword().equals(password)){
+            return user.getId();
+        }
+        else {
+            throw new IllegalArgumentException("비밀번호가 틀렸어용.");
+        }
+    }
 }
