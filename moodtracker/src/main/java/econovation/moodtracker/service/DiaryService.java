@@ -51,12 +51,12 @@ public class DiaryService {
     }
 
     public void updateDiary(Long diaryPK, String content){
-        Diary diary = findDiary(diaryPK)
-                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+        Diary diary = findDiary(diaryPK);
         diary.update(content);
     }
-    public Optional<Diary> findDiary(Long diaryPK){
-        return diaryRepository.findById(diaryPK);
+    public Diary findDiary(Long diaryPK){
+        return diaryRepository.findById(diaryPK)
+                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
     }
     public List<Diary> findAllDiaries(LocalDate localDate, Long userPK){
 
@@ -74,8 +74,7 @@ public class DiaryService {
                 .orElseThrow(() -> new NullPointerException("이 에러는 불가능한 에러"));
     }
     public DiaryResponseDTO findOneDiary(Long diaryPK){
-        Diary diary = findDiary(diaryPK)
-                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+        Diary diary = findDiary(diaryPK);
         return DiaryResponseDTO.of(diary.getEmotion(), diary);
     }
 
@@ -91,8 +90,7 @@ public class DiaryService {
     }
 
     public void deleteDiary(Long diaryPK){
-        Diary diary = findDiary(diaryPK)
-                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+        Diary diary = findDiary(diaryPK);
         Emotion emotion = diary.getEmotion();
         Long emotionId = emotion.getId();
         List<Diary> diaries = diaryRepository.findAllByEmotionId(emotionId);
