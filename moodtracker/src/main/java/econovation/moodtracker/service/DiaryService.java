@@ -3,6 +3,7 @@ package econovation.moodtracker.service;
 import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Response.CalendarResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
 import econovation.moodtracker.repository.DiaryRepository;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,6 +90,19 @@ public class DiaryService {
         }
     }
 
+    public CalendarResponseDTO findCalendar(LocalDate endDate, Long userPK){
+        List<Boolean> existDates = new ArrayList<>();
+        LocalDate startTime = endDate.withDayOfMonth(1);
+        for (int i=0;i<endDate.getDayOfMonth();i++){
+            if(!findAllDiaries(startTime.plusDays(i), userPK).isEmpty()){
+                existDates.add(true);
+            }
+            else{
+                existDates.add(false);
+            }
+        }
+        return CalendarResponseDTO.of(endDate, existDates);
+    }
     public void deleteDiary(Long diaryPK){
         Diary diary = findDiary(diaryPK);
         Emotion emotion = diary.getEmotion();
