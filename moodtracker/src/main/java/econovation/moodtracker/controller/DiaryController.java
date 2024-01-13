@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class DiaryController {
     private final DiaryService diaryService;
-    @GetMapping("/diaries/{pk}")
-    public ResponseEntity<DiaryResponseDTO> findDiary(@PathVariable("pk") Long diaryPK) {
+    @GetMapping("/diaries/{id}")
+    public ResponseEntity<DiaryResponseDTO> findDiary(@PathVariable("id") Long diaryPK) {
         DiaryResponseDTO diaryResponseDTO = diaryService.findOneDiary(diaryPK);
         return new ResponseEntity<>(diaryResponseDTO, HttpStatus.OK);
     }
