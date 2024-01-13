@@ -76,7 +76,7 @@ public class DiaryService {
         Diary diary = findDiary(diaryPK);
         return DiaryResponseDTO.of(diary.getEmotion(), diary);
     }
-
+    //특정 날자 로그
     public DiaryLogResponseDTO findAllDiaryLog(LocalDate localDate, Long userPK){
         List<Diary> diaries = findAllDiaries(localDate, userPK);
         if(diaries.isEmpty()){
