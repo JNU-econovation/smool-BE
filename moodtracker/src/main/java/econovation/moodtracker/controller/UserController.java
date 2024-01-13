@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/users/join")
+    @PostMapping("/user/join")
     public ResponseEntity<Long> join(@RequestBody UserCreateRequestDTO userCreateRequestDTO){
         Long userPK = userService.join(userCreateRequestDTO);
         return new ResponseEntity<>(userPK, HttpStatus.CREATED);
