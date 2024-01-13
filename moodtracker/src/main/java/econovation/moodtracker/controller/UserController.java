@@ -22,7 +22,7 @@ public class UserController {
         return new ResponseEntity<>(userPK, HttpStatus.CREATED);
     }
 
-    @PostMapping("/users/join")
+    @PostMapping("/user/login")
     public ResponseEntity<Long> login(@RequestBody UserLoginRequestDTO userLoginRequestDTO){
         Long userPK = userService.login(userLoginRequestDTO.getUserId(), userLoginRequestDTO.getPassword());
         return new ResponseEntity<>(userPK, HttpStatus.OK);
