@@ -13,4 +13,10 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor
 public class CalendarDateDTO {
     private boolean isExist;
+
+    public static CalendarDateDTO of(boolean isExist){
+        return CalendarDateDTO.builder()
+                .isExist(isExist)
+                .build();
+    }
 }
