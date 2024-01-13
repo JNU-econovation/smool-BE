@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
-    Optional<List<Diary>> findAllByTimeBetweenAndUserId(LocalDateTime startTime, LocalDateTime endTime, Long userId);
+    List<Diary> findAllByTimeBetweenAndUserId(LocalDateTime startTime, LocalDateTime endTime, Long userId);
     List<Diary> findAllByEmotionId(Long emotionId);
 }
