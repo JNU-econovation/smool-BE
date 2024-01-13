@@ -11,5 +11,5 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
-public class UserLoginRequestDTO extends  UserCreateRequestDTO{
+public class UserLoginRequestDTO extends UserCreateRequestDTO{
 }
