@@ -1,6 +1,7 @@
 package econovation.moodtracker.controller;
 
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
 import econovation.moodtracker.domain.dto.Response.CalendarResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
@@ -39,5 +40,12 @@ public class DiaryController {
     public ResponseEntity<DiaryResponseDTO> findDiary(@PathVariable("id") Long diaryPK) {
         DiaryResponseDTO diaryResponseDTO = diaryService.findOneDiary(diaryPK);
         return new ResponseEntity<>(diaryResponseDTO, HttpStatus.OK);
+    }
+
+    @PutMapping("/diaries/{id}")
+    public ResponseEntity<CommonResponseDTO> updateDiary(@PathVariable("id") Long diaryPK, @RequestBody DiaryUpdateRequestDTO diaryUpdateRequestDTO){
+        diaryService.updateDiary(diaryUpdateRequestDTO);
+        CommonResponseDTO commonResponseDTO = CommonResponseDTO.of("일기 수정 완료");
+        return new ResponseEntity<>(commonResponseDTO, HttpStatus.ACCEPTED);
     }
 }
