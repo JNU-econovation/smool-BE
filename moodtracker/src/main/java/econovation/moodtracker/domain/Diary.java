@@ -24,9 +24,9 @@ public class Diary {
     @JoinColumn(name = "users_id")
     private User user;
 
-    private LocalDateTime time;
-
     private String content;
+
+    private LocalDateTime time;
     @Builder
     public Diary(Long id, Emotion emotion, LocalDateTime time, String content, User user) {
         this.id = id;
