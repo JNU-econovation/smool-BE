@@ -3,6 +3,7 @@ package econovation.moodtracker.service;
 import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
+import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
 import econovation.moodtracker.domain.dto.Response.CalendarResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
@@ -52,9 +53,17 @@ public class DiaryService {
         return diary.getId();
     }
 
-    public void updateDiary(Long diaryPK, String content){
-        Diary diary = findDiary(diaryPK);
-        diary.update(content);
+    public void updateDiary(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
+        Diary diary = findDiary(diaryUpdateRequestDTO.getDiaryPK());
+        Emotion emotion = emotionService.findEmotion(diary.getEmotion().getId());
+
+        diary.update(diaryUpdateRequestDTO.getContent());
+        emotion.update(diaryUpdateRequestDTO.getHappiness(),
+                diaryUpdateRequestDTO.getGloom(),
+                diaryUpdateRequestDTO.getAnxiety(),
+                diaryUpdateRequestDTO.getStress(),
+                diaryUpdateRequestDTO.getSleep()
+        );
     }
     public Diary findDiary(Long diaryPK){
         return diaryRepository.findById(diaryPK)
