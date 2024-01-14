@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -15,6 +16,7 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor
 public class DiaryCreateRequestDTO {
     // 날짜
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate localDate;
     // 일기 domain
     private Long userPK;
