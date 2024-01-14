@@ -26,8 +26,8 @@ public class DiaryController {
         return new ResponseEntity<>(calendarResponseDTO, HttpStatus.OK);
     }
     @GetMapping("/calendar/date/{date}")
-    public ResponseEntity<DiaryLogResponseDTO> findDiaryLog (Long userPK, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date")LocalDate date){
-        DiaryLogResponseDTO diaryLogResponseDTO = diaryService.findAllDiaryLog(date, userPK);
+    public ResponseEntity<DiaryLogResponseDTO> findDiaryLog (@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date")LocalDate date){
+        DiaryLogResponseDTO diaryLogResponseDTO = diaryService.findAllDiaryLog(date, commonRequestDTO.getUserPk());
         return new ResponseEntity<>(diaryLogResponseDTO, HttpStatus.OK);
     }
     @PostMapping("/diaries")
