@@ -20,13 +20,13 @@ public class Diary {
     @JoinColumn(name = "emotion_id")
     private Emotion emotion;
 
-    private LocalDateTime time;
-
-    private String content;
-
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "users_id")
     private User user;
+
+    private LocalDateTime time;
+
+    private String content;
     @Builder
     public Diary(Long id, Emotion emotion, LocalDateTime time, String content, User user) {
         this.id = id;
