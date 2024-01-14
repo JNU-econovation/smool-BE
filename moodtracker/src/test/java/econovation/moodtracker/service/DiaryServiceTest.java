@@ -83,7 +83,7 @@ class DiaryServiceTest {
                 .content("updated updated")
 
                 .build();
-        diaryService.updateDiary(diaryUpdateRequestDTO.getDiaryPK(), diaryUpdateRequestDTO.getContent());
+        diaryService.updateDiary(diaryUpdateRequestDTO);
         //then
         assertEquals(diaryService.findDiary(diaryId).getContent(), "updated updated");
     }
