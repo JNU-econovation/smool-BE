@@ -1,8 +1,10 @@
 package econovation.moodtracker.controller;
 
+import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
 import econovation.moodtracker.domain.dto.Response.CalendarResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
+import econovation.moodtracker.domain.dto.common.CommonResponseDTO;
 import econovation.moodtracker.service.DiaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,6 +28,13 @@ public class DiaryController {
         DiaryLogResponseDTO diaryLogResponseDTO = diaryService.findAllDiaryLog(date, userPK);
         return new ResponseEntity<>(diaryLogResponseDTO, HttpStatus.OK);
     }
+    @PostMapping("/diaries")
+    public ResponseEntity<CommonResponseDTO> createDiary(@RequestBody DiaryCreateRequestDTO diaryCreateRequestDTO){
+        diaryService.join(diaryCreateRequestDTO);
+        CommonResponseDTO commonResponseDTO = CommonResponseDTO.of("일기 작성 완료");
+        return new ResponseEntity<>(commonResponseDTO, HttpStatus.CREATED);
+    }
+
     @GetMapping("/diaries/{id}")
     public ResponseEntity<DiaryResponseDTO> findDiary(@PathVariable("id") Long diaryPK) {
         DiaryResponseDTO diaryResponseDTO = diaryService.findOneDiary(diaryPK);
