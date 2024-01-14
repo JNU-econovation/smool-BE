@@ -21,14 +21,15 @@ public class DiaryResponseDTO {
 
 //DTO -> Entity = toEntity
 //Entity -> DTO = of
+    // 일기 domain
+    private String content;
+
     // 감정 domain
     private Integer happiness;
     private Integer gloom;
     private Integer anxiety;
     private Integer stress;
     private Integer sleep;
-    // 일기 domain
-    private String content;
 
     public static DiaryResponseDTO of(Emotion emotion, Diary diary) {
         return DiaryResponseDTO.builder()
