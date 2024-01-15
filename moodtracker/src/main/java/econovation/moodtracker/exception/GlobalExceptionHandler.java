@@ -9,17 +9,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    @ExceptionHandler(SameUserIdException.class)
+    public ApiResponse.Result<?> handleSameUserIdException(Exception e){
+        return ApiResponseGenerator.error(e.getMessage());
+    }
     @ExceptionHandler(UserNotFoundException.class)
     public ApiResponse.Result<?> handleUserNotFoundException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
     }
     @ExceptionHandler(UserPasswordNotCorrect.class)
     public ApiResponse.Result<?> handleUserPasswordNotCorrectException(Exception e){
-        return ApiResponseGenerator.error(e.getMessage());
-    }
-
-    @ExceptionHandler(SameUserIdException.class)
-    public ApiResponse.Result<?> handleSameUserIdException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
     }
 }
