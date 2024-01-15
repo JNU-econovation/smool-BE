@@ -2,6 +2,7 @@ package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.User;
+import econovation.moodtracker.exception.UserNotFoundException;
 import econovation.moodtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class UserService {
 
     public User findUser(Long userPK){
         return userRepository.findById(userPK)
-                .orElseThrow(() -> new NullPointerException("사람이 없어용"));
+                .orElseThrow(UserNotFoundException::new);
     }
 
     public Long login(String userId, String password){
