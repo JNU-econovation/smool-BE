@@ -37,7 +37,7 @@ public class EmotionService {
     }
 
     public Emotion updateEmotion(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
-        Emotion emotion = findEmotion(diaryUpdateRequestDTO.getEmotionPK());
+        Emotion emotion = findEmotion(diaryUpdateRequestDTO.getEmotionPk());
         emotion.update(diaryUpdateRequestDTO.getHappiness(),
                 diaryUpdateRequestDTO.getGloom(),
                 diaryUpdateRequestDTO.getAnxiety(),
@@ -59,7 +59,7 @@ public class EmotionService {
                 .withMinute(59)
                 .withSecond(59);
 
-        List<Diary> diaries = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, diaryCreateRequestDTO.getUserPK());
+        List<Diary> diaries = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, diaryCreateRequestDTO.getUserPk());
         if (diaries.isEmpty()){
             throw new NullPointerException("일기가 없어용");
         }
