@@ -7,6 +7,7 @@ import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
 import econovation.moodtracker.domain.dto.Response.CalendarResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
+import econovation.moodtracker.exception.DiaryNotFoundException;
 import econovation.moodtracker.repository.DiaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -67,7 +68,7 @@ public class DiaryService {
     }
     public Diary findDiary(Long diaryPK){
         return diaryRepository.findById(diaryPK)
-                .orElseThrow(() -> new NullPointerException("일기가 없어용"));
+                .orElseThrow(DiaryNotFoundException::new);
     }
     public List<Diary> findAllDiaries(LocalDate localDate, Long userPK){
 
