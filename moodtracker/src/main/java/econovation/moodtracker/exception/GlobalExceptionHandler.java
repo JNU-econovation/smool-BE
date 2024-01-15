@@ -21,6 +21,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ApiResponse.Result<?> handleSameUserIdException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
     }
+
+    @ExceptionHandler(UserIdNotFountException.class)
+    public ApiResponse.Result<?> handleUserIdNotFountExceptionException(Exception e){
+        return ApiResponseGenerator.error(e.getMessage());
+    }
     @ExceptionHandler(UserNotFoundException.class)
     public ApiResponse.Result<?> handleUserNotFoundException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
