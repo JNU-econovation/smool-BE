@@ -33,10 +33,9 @@ public class DiaryController {
         return ApiResponseGenerator.success(diaryLogResponseDTO, "로그 조회 성공");
     }
     @PostMapping("/diaries")
-    public ResponseEntity<CommonResponseDTO> createDiary(@RequestBody DiaryCreateRequestDTO diaryCreateRequestDTO){
+    public ApiResponse.Result<?> createDiary(@RequestBody DiaryCreateRequestDTO diaryCreateRequestDTO){
         diaryService.join(diaryCreateRequestDTO);
-        CommonResponseDTO commonResponseDTO = CommonResponseDTO.of("일기 작성 완료");
-        return new ResponseEntity<>(commonResponseDTO, HttpStatus.CREATED);
+        return ApiResponseGenerator.success(null, "일기 작성 완료");
     }
 
     @GetMapping("/diaries/{id}")
