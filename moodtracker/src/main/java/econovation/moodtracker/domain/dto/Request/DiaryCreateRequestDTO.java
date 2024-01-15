@@ -19,7 +19,7 @@ public class DiaryCreateRequestDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate localDate;
     // 일기 domain
-    private Long userPK;
+    private Long userPk;
     private String content;
 
     // 감정 domain

@@ -13,11 +13,11 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor
 public class DiaryUpdateRequestDTO {
     // 일기 domain
-    private Long diaryPK;
+    private Long diaryPk;
     private String content;
 
     // 감정 domain
-    private Long emotionPK;
+    private Long emotionPk;
     private Integer happiness;
     private Integer gloom;
     private Integer anxiety;
