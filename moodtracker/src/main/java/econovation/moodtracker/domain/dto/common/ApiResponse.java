@@ -1,5 +1,6 @@
 package econovation.moodtracker.domain.dto.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class ApiResponse<T> extends ResponseEntity<T> {
     @AllArgsConstructor
     public static class Result<T>{
         @JsonProperty("data")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         private T response;
         private int status;
         private String message;
