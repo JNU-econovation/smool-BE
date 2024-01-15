@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DiaryNotFoundException.class)
-    public ApiResponse.Result<?> handleDiaryNotFoundExceptionException(Exception e){
+    public ApiResponse.Result<?> handleDiaryNotFoundException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
     }
     @ExceptionHandler(EmotionNotFoundException.class)
