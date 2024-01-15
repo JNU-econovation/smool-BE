@@ -16,11 +16,13 @@ import static lombok.AccessLevel.PROTECTED;
 @AllArgsConstructor
 //일기 로그 조회할 때 일기 하나
 public class OneDiaryLogDTO {
+    private Long userPk;
     private String content;
     private LocalTime localTime;
 
     public static OneDiaryLogDTO of(Diary diary){
         return OneDiaryLogDTO.builder()
+                .userPk(diary.getId())
                 .content(diary.getContent())
                 .localTime(diary.getTime().toLocalTime())
                 .build();
