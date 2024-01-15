@@ -45,10 +45,9 @@ public class DiaryController {
     }
 
     @PutMapping("/diaries/{id}")
-    public ResponseEntity<CommonResponseDTO> updateDiary(@PathVariable("id") Long diaryPK, @RequestBody DiaryUpdateRequestDTO diaryUpdateRequestDTO){
+    public ApiResponse.Result<?> updateDiary(@PathVariable("id") Long diaryPK, @RequestBody DiaryUpdateRequestDTO diaryUpdateRequestDTO){
         diaryService.updateDiary(diaryUpdateRequestDTO);
-        CommonResponseDTO commonResponseDTO = CommonResponseDTO.of("일기 수정 완료");
-        return new ResponseEntity<>(commonResponseDTO, HttpStatus.ACCEPTED);
+        return ApiResponseGenerator.success(null, "일기 수정 완료");
     }
 
     @DeleteMapping("/diaries/{id}")
