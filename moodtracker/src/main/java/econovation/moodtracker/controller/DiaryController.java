@@ -51,10 +51,9 @@ public class DiaryController {
     }
 
     @DeleteMapping("/diaries/{id}")
-    public ResponseEntity<CommonResponseDTO> deleteDiary(@PathVariable("id") Long diaryPK){
+    public ApiResponse.Result<?> deleteDiary(@PathVariable("id") Long diaryPK){
         diaryService.deleteDiary(diaryPK);
-        CommonResponseDTO commonResponseDTO = CommonResponseDTO.of("일기 삭제 완료");
-        return new ResponseEntity<>(commonResponseDTO, HttpStatus.ACCEPTED);
+        return ApiResponseGenerator.success(null, "일기 삭제 완료");
     }
 
 }
