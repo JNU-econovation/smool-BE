@@ -5,6 +5,8 @@ import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
 import econovation.moodtracker.domain.dto.Response.CalendarResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryLogResponseDTO;
 import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
+import econovation.moodtracker.domain.dto.common.ApiResponse;
+import econovation.moodtracker.domain.dto.common.ApiResponseGenerator;
 import econovation.moodtracker.domain.dto.common.CommonRequestDTO;
 import econovation.moodtracker.domain.dto.common.CommonResponseDTO;
 import econovation.moodtracker.service.DiaryService;
@@ -21,9 +23,9 @@ import java.time.LocalDate;
 public class DiaryController {
     private final DiaryService diaryService;
     @GetMapping("/calendar/{dates}")
-    public ResponseEntity<CalendarResponseDTO> findCalendar(@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("dates")LocalDate endDate){
+    public ApiResponse.Result<CalendarResponseDTO> findCalendar(@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("dates")LocalDate endDate){
         CalendarResponseDTO calendarResponseDTO = diaryService.findCalendar(endDate, commonRequestDTO.getUserPk());
-        return new ResponseEntity<>(calendarResponseDTO, HttpStatus.OK);
+        return ApiResponseGenerator.success(calendarResponseDTO, "캘린더 조회 성공");
     }
     @GetMapping("/calendar/date/{date}")
     public ResponseEntity<DiaryLogResponseDTO> findDiaryLog (@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date")LocalDate date){
