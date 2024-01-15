@@ -28,9 +28,9 @@ public class DiaryController {
         return ApiResponseGenerator.success(calendarResponseDTO, "캘린더 조회 성공");
     }
     @GetMapping("/calendar/date/{date}")
-    public ResponseEntity<DiaryLogResponseDTO> findDiaryLog (@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date")LocalDate date){
+    public ApiResponse.Result<DiaryLogResponseDTO> findDiaryLog (@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date")LocalDate date){
         DiaryLogResponseDTO diaryLogResponseDTO = diaryService.findAllDiaryLog(date, commonRequestDTO.getUserPk());
-        return new ResponseEntity<>(diaryLogResponseDTO, HttpStatus.OK);
+        return ApiResponseGenerator.success(diaryLogResponseDTO, "로그 조회 성공");
     }
     @PostMapping("/diaries")
     public ResponseEntity<CommonResponseDTO> createDiary(@RequestBody DiaryCreateRequestDTO diaryCreateRequestDTO){
