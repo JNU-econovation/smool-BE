@@ -25,9 +25,8 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public ResponseEntity<Long> login(@RequestBody UserLoginRequestDTO userLoginRequestDTO){
+    public ApiResponse.Result<?> login(@RequestBody UserLoginRequestDTO userLoginRequestDTO){
         Long userPK = userService.login(userLoginRequestDTO.getUserId(), userLoginRequestDTO.getPassword());
-        //pk값을 전해주지 않고 메세지를 받으면 나중에 일기 조회할 때 pk값으로 조회해야하는데 그걸 어떻게 하지...?
-        return new ResponseEntity<>(userPK, HttpStatus.OK);
+        return new ApiResponse.Result<>(UserResponseDTO.of(userPK),200, "로그인이 완료되었습니다.");
     }
 }
