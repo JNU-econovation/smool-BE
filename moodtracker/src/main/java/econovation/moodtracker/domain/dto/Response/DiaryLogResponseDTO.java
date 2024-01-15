@@ -1,5 +1,6 @@
 package econovation.moodtracker.domain.dto.Response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.domain.Emotion;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class DiaryLogResponseDTO {
     private Integer anxiety;
     private Integer stress;
     private Integer sleep;
-
+    @JsonProperty("todayDiaries")
     private List<OneDiaryLogDTO> oneDiaryLogResponseDTOs;
 
     public static DiaryLogResponseDTO of(Emotion emotion){
