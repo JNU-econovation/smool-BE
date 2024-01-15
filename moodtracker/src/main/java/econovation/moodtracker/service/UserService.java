@@ -3,6 +3,7 @@ package econovation.moodtracker.service;
 import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.User;
 import econovation.moodtracker.exception.SameUserIdException;
+import econovation.moodtracker.exception.UserIdNotFountException;
 import econovation.moodtracker.exception.UserNotFoundException;
 import econovation.moodtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,7 @@ public class UserService {
 
     public Long login(String userId, String password){
         User user = userRepository.findUserByUserId(userId)
-                .orElseThrow(() -> new NullPointerException("해당 아이디가 없어용"));
+                .orElseThrow(UserIdNotFountException::new);
         if (user.getPassword().equals(password)){
             return user.getId();
         }
