@@ -5,6 +5,7 @@ import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
 import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
+import econovation.moodtracker.exception.DiaryNotFoundException;
 import econovation.moodtracker.repository.DiaryRepository;
 import econovation.moodtracker.repository.EmotionRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,7 +62,7 @@ public class EmotionService {
 
         List<Diary> diaries = diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, diaryCreateRequestDTO.getUserPk());
         if (diaries.isEmpty()){
-            throw new NullPointerException("일기가 없어용");
+            throw new DiaryNotFoundException();
         }
         Emotion emotion = diaries.get(0).getEmotion();
         emotion.update(diaryCreateRequestDTO.getHappiness(), diaryCreateRequestDTO.getGloom(),
