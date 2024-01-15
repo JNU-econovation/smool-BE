@@ -5,6 +5,7 @@ import econovation.moodtracker.domain.User;
 import econovation.moodtracker.exception.SameUserIdException;
 import econovation.moodtracker.exception.UserIdNotFountException;
 import econovation.moodtracker.exception.UserNotFoundException;
+import econovation.moodtracker.exception.UserPasswordNotCorrect;
 import econovation.moodtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class UserService {
             return user.getId();
         }
         else {
-            throw new IllegalArgumentException("비밀번호가 틀렸어용.");
+            throw new UserPasswordNotCorrect();
         }
     }
 }
