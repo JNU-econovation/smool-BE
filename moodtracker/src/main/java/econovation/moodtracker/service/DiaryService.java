@@ -123,7 +123,7 @@ public class DiaryService {
         diaryRepository.delete(diary);
     }
     public boolean isExistTodayEmotion(DiaryCreateRequestDTO diaryCreateRequestDTO){
-        List<Diary> getTodayDiaries = findAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPK());
+        List<Diary> getTodayDiaries = findAllDiaries(diaryCreateRequestDTO.getLocalDate(), diaryCreateRequestDTO.getUserPk());
         return !getTodayDiaries.isEmpty();
     }
 }
