@@ -13,6 +13,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ApiResponse.Result<?> handleDiaryNotFoundExceptionException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
     }
+    @ExceptionHandler(EmotionNotFoundException.class)
+    public ApiResponse.Result<?> handleEmotionNotFoundException(Exception e){
+        return ApiResponseGenerator.error(e.getMessage());
+    }
     @ExceptionHandler(SameUserIdException.class)
     public ApiResponse.Result<?> handleSameUserIdException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
