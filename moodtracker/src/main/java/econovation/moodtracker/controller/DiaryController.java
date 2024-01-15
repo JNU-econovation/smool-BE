@@ -39,9 +39,9 @@ public class DiaryController {
     }
 
     @GetMapping("/diaries/{id}")
-    public ResponseEntity<DiaryResponseDTO> findDiary(@PathVariable("id") Long diaryPK) {
+    public ApiResponse.Result<DiaryResponseDTO> findDiary(@PathVariable("id") Long diaryPK) {
         DiaryResponseDTO diaryResponseDTO = diaryService.findOneDiary(diaryPK);
-        return new ResponseEntity<>(diaryResponseDTO, HttpStatus.OK);
+        return ApiResponseGenerator.success(diaryResponseDTO, "로그 조회 성공");
     }
 
     @PutMapping("/diaries/{id}")
