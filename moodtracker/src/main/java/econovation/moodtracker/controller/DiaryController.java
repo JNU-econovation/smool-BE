@@ -41,7 +41,7 @@ public class DiaryController {
     @GetMapping("/diaries/{id}")
     public ApiResponse.Result<DiaryResponseDTO> findDiary(@PathVariable("id") Long diaryPK) {
         DiaryResponseDTO diaryResponseDTO = diaryService.findOneDiary(diaryPK);
-        return ApiResponseGenerator.success(diaryResponseDTO, "로그 조회 성공");
+        return ApiResponseGenerator.success(diaryResponseDTO, "일기 조회 성공");
     }
 
     @PutMapping("/diaries/{id}")
