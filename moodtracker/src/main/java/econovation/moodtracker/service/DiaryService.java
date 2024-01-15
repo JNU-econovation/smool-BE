@@ -38,14 +38,14 @@ public class DiaryService {
             diary = Diary.builder()
                     .time(joinedDateTime)
                     .content(diaryCreateRequestDTO.getContent())
-                    .user(userService.findUser(diaryCreateRequestDTO.getUserPK()))
+                    .user(userService.findUser(diaryCreateRequestDTO.getUserPk()))
                     .emotion(emotionService.updateEmotion(diaryCreateRequestDTO))
                     .build();
         }else{
             diary = Diary.builder()
                     .time(joinedDateTime)
                     .content(diaryCreateRequestDTO.getContent())
-                    .user(userService.findUser(diaryCreateRequestDTO.getUserPK()))
+                    .user(userService.findUser(diaryCreateRequestDTO.getUserPk()))
                     .emotion(emotionService.join(diaryCreateRequestDTO))
                     .build();
         }
@@ -54,7 +54,7 @@ public class DiaryService {
     }
 
     public void updateDiary(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
-        Diary diary = findDiary(diaryUpdateRequestDTO.getDiaryPK());
+        Diary diary = findDiary(diaryUpdateRequestDTO.getDiaryPk());
         Emotion emotion = emotionService.findEmotion(diary.getEmotion().getId());
 
         diary.update(diaryUpdateRequestDTO.getContent());
