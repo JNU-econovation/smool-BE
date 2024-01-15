@@ -2,6 +2,7 @@ package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.User;
+import econovation.moodtracker.exception.SameUserIdException;
 import econovation.moodtracker.exception.UserNotFoundException;
 import econovation.moodtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class UserService {
     private void validateDuplicateUser(UserCreateRequestDTO userCreateRequestDTO){
         Optional<User> findUser = userRepository.findUserByUserId(userCreateRequestDTO.getUserId());
         if(findUser.isPresent()){
-            throw new IllegalStateException("이미 존재하는 아이디입니다.");
+            throw new SameUserIdException();
         }
     }
 
