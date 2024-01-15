@@ -6,6 +6,7 @@ import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
 import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
 import econovation.moodtracker.exception.DiaryNotFoundException;
+import econovation.moodtracker.exception.EmotionNotFoundException;
 import econovation.moodtracker.repository.DiaryRepository;
 import econovation.moodtracker.repository.EmotionRepository;
 import lombok.RequiredArgsConstructor;
@@ -74,7 +75,7 @@ public class EmotionService {
 
     public Emotion findEmotion(Long emotionPK){
         return emotionRepository.findById(emotionPK)
-                .orElseThrow(() -> new NullPointerException("감정이 없어용"));
+                .orElseThrow(EmotionNotFoundException::new);
     }
 
     public void deleteEmotion(Long emotionPK){
