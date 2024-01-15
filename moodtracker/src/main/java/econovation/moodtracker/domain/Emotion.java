@@ -15,7 +15,7 @@ import static jakarta.persistence.FetchType.*;
 @Builder
 public class Emotion {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emotion_id")
     private Long id;
     @Builder.Default
