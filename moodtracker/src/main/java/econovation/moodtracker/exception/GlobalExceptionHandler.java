@@ -22,6 +22,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ApiResponseGenerator.error(e.getMessage());
     }
 
+    @ExceptionHandler(StatisticsEmotionNotFoundException.class)
+    public ApiResponse.Result<?> handleStatisticsEmotionNotFoundException(Exception e){
+        return ApiResponseGenerator.error(e.getMessage());
+    }
+
     @ExceptionHandler(UserIdNotFountException.class)
     public ApiResponse.Result<?> handleUserIdNotFountExceptionException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
