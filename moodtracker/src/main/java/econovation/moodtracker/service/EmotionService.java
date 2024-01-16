@@ -79,6 +79,91 @@ public class EmotionService {
                 .orElseThrow(EmotionNotFoundException::new);
     }
 
+    public EmotionResponseDTO findStatisticsEmotions(LocalDate endDate, Long userPK){
+        List<EmotionDateDTO> happinessDateDTOList = new ArrayList<>();
+        List<EmotionDateDTO> gloomDateDTOList = new ArrayList<>();
+        List<EmotionDateDTO> anxietyDateDTOList = new ArrayList<>();
+        List<EmotionDateDTO> stressDateDTOList = new ArrayList<>();
+        List<EmotionDateDTO> sleepDateDTOList = new ArrayList<>();
+
+        List<Integer> existDate = new ArrayList<>();
+        Map<Integer, Emotion> emotionMap = new HashMap<>();
+
+        LocalDate startTime = endDate.withDayOfMonth(1);
+        for(int i=0; i<endDate.getDayOfMonth();i++){
+            LocalDate date = startTime.plusDays((i));
+            List<Diary> diaries = findEmotionByDiaries(date, userPK);
+
+            if (!diaries.isEmpty()){
+                existDate.add(date.getDayOfMonth());
+                emotionMap.put(date.getDayOfMonth(), diaries.get(0).getEmotion());
+            }
+            else{
+                emotionMap.put(date.getDayOfMonth(), null);
+            }
+        }
+
+        if(!existDate.contains(1)){
+            existDate.add(0,1);
+            emotionMap.put(1, Emotion.builder()
+                    .happiness(5)
+                    .gloom(5)
+                    .anxiety(5)
+                    .stress(5)
+                    .sleep(5)
+                    .build());
+        }
+        if(!existDate.contains(endDate.getDayOfMonth())){
+            existDate.add(existDate.size()-1,endDate.getDayOfMonth());
+            emotionMap.put(endDate.getDayOfMonth(), Emotion.builder()
+                    .happiness(5)
+                    .gloom(5)
+                    .anxiety(5)
+                    .stress(5)
+                    .sleep(5)
+                    .build());
+        }
+
+        for(int i=0;i<existDate.size()-1;i++){
+            int start = existDate.get(i);
+            int end = existDate.get(i+1);
+            if ((end - start) != 1){
+                for(int j=1;j<end-start;j++){
+                    int startHappiness = emotionMap.get(start).getHappiness();
+                    int startGloom = emotionMap.get(start).getGloom();
+                    int startAnxiety = emotionMap.get(start).getAnxiety();
+                    int startStress = emotionMap.get(start).getStress();
+                    int startSleep = emotionMap.get(start).getSleep();
+
+                    int endHappiness = emotionMap.get(end).getHappiness();
+                    int endGloom = emotionMap.get(end).getGloom();
+                    int endAnxiety = emotionMap.get(end).getAnxiety();
+                    int endStress = emotionMap.get(end).getStress();
+                    int endSleep = emotionMap.get(end).getSleep();
+
+                    emotionMap.put(start+j, Emotion.builder()
+                            .happiness(startHappiness + (j * (endHappiness - startHappiness))/(end-start))
+                            .gloom(startGloom + (j * (endGloom - startGloom))/(end-start))
+                            .anxiety(startAnxiety + (j * (endAnxiety - startAnxiety))/(end-start))
+                            .stress(startStress + (j * (endStress - startStress))/(end-start))
+                            .sleep(startSleep + (j * (endSleep - startSleep))/(end-start))
+                            .build());
+                }
+            }
+        }
+
+        for(int i=0;i<endDate.getDayOfMonth();i++){
+            LocalDate date = startTime.plusDays((i));
+            happinessDateDTOList.add(EmotionDateDTO.of(date, emotionMap.get(i+1).getHappiness()));
+            gloomDateDTOList.add(EmotionDateDTO.of(date, emotionMap.get(i+1).getGloom()));
+            anxietyDateDTOList.add(EmotionDateDTO.of(date, emotionMap.get(i+1).getAnxiety()));
+            stressDateDTOList.add(EmotionDateDTO.of(date, emotionMap.get(i+1).getStress()));
+            sleepDateDTOList.add(EmotionDateDTO.of(date, emotionMap.get(i+1).getSleep()));
+        }
+
+        return EmotionResponseDTO.of(happinessDateDTOList, gloomDateDTOList, anxietyDateDTOList, stressDateDTOList, sleepDateDTOList);
+    }
+
     public void deleteEmotion(Long emotionPK){
         emotionRepository.delete(findEmotion(emotionPK));
     }
