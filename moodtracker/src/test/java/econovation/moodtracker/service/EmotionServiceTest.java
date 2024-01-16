@@ -96,7 +96,7 @@ class EmotionServiceTest {
                 .gloom(gloom)
 
                 .content(content)
-                .userPK(savedId)
+                .userPk(savedId)
                 .build();
     }
 
@@ -104,7 +104,7 @@ class EmotionServiceTest {
         return DiaryUpdateRequestDTO
                 .builder()
 
-                .emotionPK(emotionPK)
+                .emotionPk(emotionPK)
                 .happiness(happiness)
                 .gloom(gloom)
                 .anxiety(anxiety)

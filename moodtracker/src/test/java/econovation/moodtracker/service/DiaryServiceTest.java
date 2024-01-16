@@ -79,7 +79,7 @@ class DiaryServiceTest {
         //when
         DiaryUpdateRequestDTO diaryUpdateRequestDTO = DiaryUpdateRequestDTO
                 .builder()
-                .diaryPK(diaryId)
+                .diaryPk(diaryId)
                 .content("updated updated")
 
                 .build();
@@ -123,7 +123,7 @@ class DiaryServiceTest {
                 .gloom(gloom)
 
                 .content(content)
-                .userPK(savedId)
+                .userPk(savedId)
                 .build();
     }
 }
