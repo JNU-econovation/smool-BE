@@ -102,9 +102,9 @@ public class DiaryService {
 
     public CalendarResponseDTO findCalendar(LocalDate endDate, Long userPK){
         List<Boolean> existDates = new ArrayList<>();
-        LocalDate startTime = endDate.withDayOfMonth(1);
+        LocalDate startDate = endDate.withDayOfMonth(1);
         for (int i=0;i<endDate.getDayOfMonth();i++){
-            if(!findAllDiaries(startTime.plusDays(i), userPK).isEmpty()){
+            if(!findAllDiaries(startDate.plusDays(i), userPK).isEmpty()){
                 existDates.add(true);
             }
             else{
