@@ -114,7 +114,7 @@ public class EmotionService {
                     .build());
         }
         if(!existDate.contains(endDate.getDayOfMonth())){
-            existDate.add(existDate.size()-1,endDate.getDayOfMonth());
+            existDate.add(endDate.getDayOfMonth());
             emotionMap.put(endDate.getDayOfMonth(), Emotion.builder()
                     .happiness(5)
                     .gloom(5)
@@ -151,7 +151,11 @@ public class EmotionService {
                 }
             }
         }
-
+        for (Map.Entry<Integer, Emotion> entrySet : emotionMap.entrySet()) {
+            System.out.println("==========================================");
+            System.out.println(entrySet.getKey() + " : " + entrySet.getValue());
+            System.out.println("==========================================");
+        }
         for(int i=0;i<endDate.getDayOfMonth();i++){
             LocalDate date = startTime.plusDays((i));
             happinessDateDTOList.add(EmotionDateDTO.of(date, emotionMap.get(i+1).getHappiness()));
