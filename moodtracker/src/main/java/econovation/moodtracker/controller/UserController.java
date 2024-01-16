@@ -28,6 +28,6 @@ public class UserController {
     @PostMapping("/user/login")
     public ApiResponse.Result<?> login(@RequestBody UserLoginRequestDTO userLoginRequestDTO){
         Long userPK = userService.login(userLoginRequestDTO.getUserId(), userLoginRequestDTO.getPassword());
-        return ApiResponseGenerator.success(UserResponseDTO.of(userPK), "로그인이 완료되었습니다.");
+        return ApiResponseGenerator.success(UserResponseDTO.of(userPK), "로그인되었습니다.");
     }
 }
