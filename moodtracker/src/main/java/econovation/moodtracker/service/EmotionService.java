@@ -5,6 +5,8 @@ import econovation.moodtracker.domain.Diary;
 import econovation.moodtracker.domain.dto.Request.DiaryCreateRequestDTO;
 import econovation.moodtracker.domain.Emotion;
 import econovation.moodtracker.domain.dto.Request.DiaryUpdateRequestDTO;
+import econovation.moodtracker.domain.dto.Response.EmotionDateDTO;
+import econovation.moodtracker.domain.dto.Response.EmotionResponseDTO;
 import econovation.moodtracker.exception.DiaryNotFoundException;
 import econovation.moodtracker.exception.EmotionNotFoundException;
 import econovation.moodtracker.repository.DiaryRepository;
@@ -15,8 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -80,5 +81,19 @@ public class EmotionService {
 
     public void deleteEmotion(Long emotionPK){
         emotionRepository.delete(findEmotion(emotionPK));
+    }
+
+    public List<Diary> findEmotionByDiaries(LocalDate localDate, Long userPK) {
+        LocalDateTime startTime = LocalDateTime.of(
+                localDate.getYear(),
+                localDate.getMonthValue(),
+                localDate.getDayOfMonth(),
+                0, 0, 0);
+        ;
+        LocalDateTime endTime = startTime
+                .withHour(23)
+                .withMinute(59)
+                .withSecond(59);
+        return diaryRepository.findAllByTimeBetweenAndUserId(startTime, endTime, userPK);
     }
 }
