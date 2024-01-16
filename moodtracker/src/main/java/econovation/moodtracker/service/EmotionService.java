@@ -151,11 +151,6 @@ public class EmotionService {
                 }
             }
         }
-        for (Map.Entry<Integer, Emotion> entrySet : emotionMap.entrySet()) {
-            System.out.println("==========================================");
-            System.out.println(entrySet.getKey() + " : " + entrySet.getValue());
-            System.out.println("==========================================");
-        }
         for(int i=0;i<endDate.getDayOfMonth();i++){
             LocalDate date = startTime.plusDays((i));
             happinessDateDTOList.add(EmotionDateDTO.of(date, emotionMap.get(i+1).getHappiness()));
