@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
-@SuperBuilder
+@Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
 public class UserCreateRequestDTO {
