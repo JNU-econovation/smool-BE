@@ -11,6 +11,7 @@ import econovation.moodtracker.domain.dto.common.CommonRequestDTO;
 import econovation.moodtracker.service.DiaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ public class DiaryController {
         return ApiResponseGenerator.success(diaryLogResponseDTO, "로그 조회 성공");
     }
     @PostMapping("/diaries")
-    public ApiResponse.Result<?> createDiary(@RequestBody DiaryCreateRequestDTO diaryCreateRequestDTO){
+    public ApiResponse.Result<?> createDiary(@Validated @RequestBody DiaryCreateRequestDTO diaryCreateRequestDTO){
         diaryService.join(diaryCreateRequestDTO);
         return ApiResponseGenerator.success(null, "일기 작성 완료");
     }
@@ -42,7 +43,7 @@ public class DiaryController {
     }
 
     @PutMapping("/diaries/{id}")
-    public ApiResponse.Result<?> updateDiary(@PathVariable("id") Long diaryPK, @RequestBody DiaryUpdateRequestDTO diaryUpdateRequestDTO){
+    public ApiResponse.Result<?> updateDiary(@PathVariable("id") Long diaryPK, @Validated @RequestBody DiaryUpdateRequestDTO diaryUpdateRequestDTO){
         diaryService.updateDiary(diaryUpdateRequestDTO);
         return ApiResponseGenerator.success(null, "일기 수정 완료");
     }
