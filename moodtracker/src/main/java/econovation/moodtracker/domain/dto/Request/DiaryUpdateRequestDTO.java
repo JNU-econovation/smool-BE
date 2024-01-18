@@ -1,5 +1,7 @@
 package econovation.moodtracker.domain.dto.Request;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,9 +20,14 @@ public class DiaryUpdateRequestDTO {
 
     // 감정 domain
     private Long emotionPk;
+    @Min(0) @Max(10)
     private Integer happiness;
+    @Min(0) @Max(10)
     private Integer gloom;
+    @Min(0) @Max(10)
     private Integer anxiety;
+    @Min(0) @Max(10)
     private Integer stress;
+    @Min(0) @Max(10)
     private Integer sleep;
 }
