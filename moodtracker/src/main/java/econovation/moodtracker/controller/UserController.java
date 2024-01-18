@@ -10,6 +10,7 @@ import econovation.moodtracker.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user/join")
-    public ApiResponse.Result<?> join(@RequestBody UserCreateRequestDTO userCreateRequestDTO){
+    public ApiResponse.Result<?> join(@Validated @RequestBody UserCreateRequestDTO userCreateRequestDTO){
         Long userPK = userService.join(userCreateRequestDTO);
         return ApiResponseGenerator.success(UserResponseDTO.of(userPK), "회원가입이 완료되었습니다.");
     }
