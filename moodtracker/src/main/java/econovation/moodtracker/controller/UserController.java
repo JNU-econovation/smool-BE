@@ -1,6 +1,5 @@
 package econovation.moodtracker.controller;
 
-import econovation.moodtracker.domain.User;
 import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.dto.Request.UserLoginRequestDTO;
 import econovation.moodtracker.domain.dto.Response.UserResponseDTO;
@@ -8,8 +7,6 @@ import econovation.moodtracker.domain.dto.common.ApiResponse;
 import econovation.moodtracker.domain.dto.common.ApiResponseGenerator;
 import econovation.moodtracker.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

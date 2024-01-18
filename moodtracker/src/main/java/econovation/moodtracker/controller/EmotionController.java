@@ -1,6 +1,5 @@
 package econovation.moodtracker.controller;
 
-import econovation.moodtracker.domain.dto.Response.CalendarResponseDTO;
 import econovation.moodtracker.domain.dto.Response.EmotionResponseDTO;
 import econovation.moodtracker.domain.dto.common.ApiResponse;
 import econovation.moodtracker.domain.dto.common.ApiResponseGenerator;

@@ -3,7 +3,6 @@ package econovation.moodtracker.domain.dto.common;
 import econovation.moodtracker.domain.dto.common.ApiResponse.Result;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.http.ResponseEntity;
 
 @Getter
 @Builder

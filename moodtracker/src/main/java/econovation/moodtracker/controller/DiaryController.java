@@ -8,12 +8,9 @@ import econovation.moodtracker.domain.dto.Response.DiaryResponseDTO;
 import econovation.moodtracker.domain.dto.common.ApiResponse;
 import econovation.moodtracker.domain.dto.common.ApiResponseGenerator;
 import econovation.moodtracker.domain.dto.common.CommonRequestDTO;
-import econovation.moodtracker.domain.dto.common.CommonResponseDTO;
 import econovation.moodtracker.service.DiaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
