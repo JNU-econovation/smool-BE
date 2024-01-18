@@ -9,7 +9,10 @@ import lombok.experimental.SuperBuilder;
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
-@SuperBuilder
+@Builder
+@NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
-public class UserLoginRequestDTO extends UserCreateRequestDTO{
+public class UserLoginRequestDTO{
+    private String userId;
+    private String password;
 }
