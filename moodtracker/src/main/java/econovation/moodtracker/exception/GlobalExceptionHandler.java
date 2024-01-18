@@ -28,6 +28,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ApiResponse.Result<?> handleEmotionNotFoundException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
     }
+    @ExceptionHandler(PasswordNotCorrectException.class)
+    public ApiResponse.Result<?> handlePasswordNotCorrectException(Exception e){
+        return ApiResponseGenerator.error(e.getMessage());
+    }
     @ExceptionHandler(SameUserIdException.class)
     public ApiResponse.Result<?> handleSameUserIdException(Exception e){
         return ApiResponseGenerator.error(e.getMessage());
