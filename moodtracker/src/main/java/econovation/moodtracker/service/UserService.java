@@ -2,10 +2,7 @@ package econovation.moodtracker.service;
 
 import econovation.moodtracker.domain.dto.Request.UserCreateRequestDTO;
 import econovation.moodtracker.domain.User;
-import econovation.moodtracker.exception.SameUserIdException;
-import econovation.moodtracker.exception.UserIdNotFountException;
-import econovation.moodtracker.exception.UserNotFoundException;
-import econovation.moodtracker.exception.UserPasswordNotCorrect;
+import econovation.moodtracker.exception.*;
 import econovation.moodtracker.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +20,7 @@ public class UserService {
     //회원 가입
     public Long join(UserCreateRequestDTO userCreateRequestDTO){
         validateDuplicateUser(userCreateRequestDTO);
+        validatePasswordCorrect(userCreateRequestDTO);
         User user = User.builder()
                 .userId(userCreateRequestDTO.getUserId())
                 .password(userCreateRequestDTO.getPassword())
@@ -35,6 +33,12 @@ public class UserService {
         Optional<User> findUser = userRepository.findUserByUserId(userCreateRequestDTO.getUserId());
         if(findUser.isPresent()){
             throw new SameUserIdException();
+        }
+    }
+
+    private  void validatePasswordCorrect(UserCreateRequestDTO userCreateRequestDTO){
+        if(!userCreateRequestDTO.getPassword().equals(userCreateRequestDTO.getCheckPassword())){
+            throw new PasswordNotCorrectException();
         }
     }
 
