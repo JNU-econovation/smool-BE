@@ -18,13 +18,13 @@ import static lombok.AccessLevel.PROTECTED;
 public class OneDiaryLogDTO {
     private Long diaryPk;
     private String content;
-    private LocalTime localTime;
+    //private LocalTime localTime;
 
     public static OneDiaryLogDTO of(Diary diary){
         return OneDiaryLogDTO.builder()
                 .diaryPk(diary.getId())
                 .content(diary.getContent())
-                .localTime(diary.getTime().toLocalTime())
+                //.localTime(diary.getTime().toLocalTime())
                 .build();
     }
 }
