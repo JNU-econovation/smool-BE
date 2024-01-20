@@ -18,6 +18,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -101,16 +104,10 @@ public class DiaryService {
     }
 
     public CalendarResponseDTO findCalendar(LocalDate endDate, Long userPK){
-        List<Boolean> existDates = new ArrayList<>();
         LocalDate startDate = endDate.withDayOfMonth(1);
-        for (int i=0;i<endDate.getDayOfMonth();i++){
-            if(!findAllDiaries(startDate.plusDays(i), userPK).isEmpty()){
-                existDates.add(true);
-            }
-            else{
-                existDates.add(false);
-            }
-        }
+        List<Boolean> existDates = IntStream.range(0, endDate.getDayOfMonth())
+                .mapToObj(i -> !findAllDiaries(startDate.plusDays(i), userPK).isEmpty())
+                .collect(Collectors.toList());
         return CalendarResponseDTO.of(endDate, existDates);
     }
     public void deleteDiary(Long diaryPK){
