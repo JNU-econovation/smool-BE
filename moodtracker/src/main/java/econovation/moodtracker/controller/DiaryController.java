@@ -20,9 +20,9 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class DiaryController {
     private final DiaryService diaryService;
-    @GetMapping("/calendar/{dates}")
-    public ApiResponse.Result<CalendarResponseDTO> findCalendar(@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("dates")LocalDate endDate){
-        CalendarResponseDTO calendarResponseDTO = diaryService.findCalendar(endDate, commonRequestDTO.getUserPk());
+    @GetMapping("/calendar/{userPk}/{dates}")
+    public ApiResponse.Result<CalendarResponseDTO> findCalendar(@PathVariable("userPk") Long userPk, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("dates")LocalDate endDate){
+        CalendarResponseDTO calendarResponseDTO = diaryService.findCalendar(endDate, userPk);
         return ApiResponseGenerator.success(calendarResponseDTO, "캘린더 조회 성공");
     }
     @GetMapping("/calendar/date/{date}")
