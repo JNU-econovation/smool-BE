@@ -19,9 +19,9 @@ import java.time.LocalDate;
 public class EmotionController {
     private final EmotionService emotionService;
 
-    @GetMapping("/emotion/statistics/{dates}")
-    public ApiResponse.Result<EmotionResponseDTO> findCalendar(@RequestBody CommonRequestDTO commonRequestDTO, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("dates") LocalDate endDate){
-        EmotionResponseDTO emotionResponseDTO = emotionService.findStatisticsEmotions(endDate, commonRequestDTO.getUserPk());
+    @GetMapping("/emotion/{userPk}/statistics/{dates}")
+    public ApiResponse.Result<EmotionResponseDTO> findCalendar(@PathVariable ("userPk") Long userPk, @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("dates") LocalDate endDate){
+        EmotionResponseDTO emotionResponseDTO = emotionService.findStatisticsEmotions(endDate,userPk);
         return ApiResponseGenerator.success(emotionResponseDTO, "통계 조회 성공");
     }
 }
