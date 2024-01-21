@@ -24,6 +24,7 @@ public class Diary {
     @JoinColumn(name = "users_id")
     private User user;
 
+    @Column(length = 10000)
     private String content;
 
     private LocalDateTime time;
