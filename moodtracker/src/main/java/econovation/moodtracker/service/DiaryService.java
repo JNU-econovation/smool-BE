@@ -38,21 +38,15 @@ public class DiaryService {
                 .withDayOfMonth(requestDTOLocalDate.getDayOfMonth());
         boolean existTodayEmotion = isExistTodayEmotion(diaryCreateRequestDTO);
         Diary diary;
-        if (existTodayEmotion){
-            diary = Diary.builder()
-                    .time(joinedDateTime)
-                    .content(diaryCreateRequestDTO.getContent())
-                    .user(userService.findUser(diaryCreateRequestDTO.getUserPk()))
-                    .emotion(emotionService.updateEmotion(diaryCreateRequestDTO))
-                    .build();
-        }else{
-            diary = Diary.builder()
-                    .time(joinedDateTime)
-                    .content(diaryCreateRequestDTO.getContent())
-                    .user(userService.findUser(diaryCreateRequestDTO.getUserPk()))
-                    .emotion(emotionService.join(diaryCreateRequestDTO))
-                    .build();
-        }
+        Emotion emotion = existTodayEmotion ?
+                emotionService.updateEmotion(diaryCreateRequestDTO) :
+                emotionService.join(diaryCreateRequestDTO);
+        diary = Diary.builder()
+                .time(joinedDateTime)
+                .content(diaryCreateRequestDTO.getContent())
+                .user(userService.findUser(diaryCreateRequestDTO.getUserPk()))
+                .emotion(emotion)
+                .build();
         diaryRepository.save(diary);
         return diary.getId();
     }
