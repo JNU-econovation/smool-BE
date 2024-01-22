@@ -40,7 +40,10 @@ public class EmotionService {
     }
 
     public Emotion updateEmotion(DiaryUpdateRequestDTO diaryUpdateRequestDTO){
-        Emotion emotion = findEmotion(diaryUpdateRequestDTO.getEmotionPk());
+        Diary diary = diaryRepository.findById(diaryUpdateRequestDTO.getDiaryPk())
+                .orElseThrow(DiaryNotFoundException::new);
+
+        Emotion emotion = diary.getEmotion();
         emotion.update(diaryUpdateRequestDTO.getHappiness(),
                 diaryUpdateRequestDTO.getGloom(),
                 diaryUpdateRequestDTO.getAnxiety(),
