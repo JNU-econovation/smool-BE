@@ -19,7 +19,6 @@ public class DiaryUpdateRequestDTO {
     private String content;
 
     // 감정 domain
-    private Long emotionPk;
     @Min(0) @Max(10)
     private Integer happiness;
     @Min(0) @Max(10)
